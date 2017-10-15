@@ -5,13 +5,15 @@ title = "Phugo"
 theme = "phugo"
 googleAnalytics = "UA-XXXXXXX-Y"
 
+publishDir = "docs"
+
 [params]
 
     # Meta
     description = "Phugo - Photo Gallery on Hugo"
     author = "aerohub"
     keywords = "phugo, hugo, photogallery, photoblog, hugo theme"
-    
+
     # Headerbar links
     # Do not put here too many links,
     # it will break mobile appearance
@@ -19,14 +21,14 @@ googleAnalytics = "UA-XXXXXXX-Y"
     [[params.header.links]]
     name = "About"
     url = "#footer"
-    icon = "fa-info-circle"    
-    
+    icon = "fa-info-circle"
+
     # Footer panel
-    
+
     [params.footer.paragraph]
     headline = "Magna feugiat sed adipiscing"
     text = "Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum."
-    
+
     [params.footer.social]
     headline = "Follow me"
 
@@ -59,9 +61,9 @@ googleAnalytics = "UA-XXXXXXX-Y"
     label = "LinkedIn"
     url = "#"
     icon = "fa-linkedin"
-    
+
     # Contact form
-    
+
     # Since this template is static, the contact form uses www.formspree.io as a
     # proxy. The form makes a POST request to their servers to send the actual
     # email. Visitors can send up to a 1000 emails each month for free.
@@ -73,13 +75,13 @@ googleAnalytics = "UA-XXXXXXX-Y"
     # - send a dummy email yourself to confirm your account
     # - click the confirm link in the email from www.formspree.io
     # - you're done. Happy mailing!
-    
+
     [params.footer.contact]
     realEmail = "example@examle.org"
     headline = "Get in touch"
     buttonText = "Send"
     resetText = "Reset"
-    
+
     # 'warning' defines error messages for invalid inputs
     [params.footer.contact.name]
     text = "Name *"
@@ -92,7 +94,7 @@ googleAnalytics = "UA-XXXXXXX-Y"
     [params.footer.contact.message]
     text = "Message *"
     warning = "Please, enter your message"
-    
+
     # Copyright
     [params.footer.copyright]
     name = "Your name"
