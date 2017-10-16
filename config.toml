@@ -1,5 +1,5 @@
 # Settings
-baseurl = "http://example.org/"
+baseurl = "https://kendallweihe.github.io/QFoster/"
 languageCode = "en-us"
 title = "Phugo"
 theme = "phugo"

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://example.org/temp/</loc>
+    <loc>https://kendallweihe.github.io/QFoster/temp/</loc>
   </url>
   
   <url>
-    <loc>https://example.org/</loc>
+    <loc>https://kendallweihe.github.io/QFoster/</loc>
     <priority>0</priority>
   </url>
   
