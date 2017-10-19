@@ -10,6 +10,10 @@ Website for Quinn Foster
   - [PHugo theme](https://themes.gohugo.io/phugo/)
   - [Demo](https://themes.gohugo.io/theme/phugo/)
 
+# The actual site:
+
+[Currently linked here](https://kendallweihe.github.io/QFoster/)
+
 # TODO:
 - clone Hugo theme above ^^^
 - create an album
