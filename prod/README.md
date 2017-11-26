@@ -24,3 +24,26 @@
   - each album has it's own page
     - duplicate html for header stuff ... for now
   - mobile friendly -- use bootstrap styling
+
+### NodeJS notes:
+  - add NodeJS <script> tag in html
+  - NodeJS file:
+    - look at main.js
+
+
+### devops stuff:
+  - HOSTING:
+    - Option A:
+      - GitHub pages to host static files
+      - CNAME for custom domain
+    - Option B:
+      - S3 bucket
+  - AWS:
+    - API Gateway
+    - Lambda
+    - NodeJS
+    - CloudFormation
+  - deployment script of sorts?
+
+
+https://orxvr2sua6.execute-api.us-east-1.amazonaws.com/prod/QFoster

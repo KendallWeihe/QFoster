@@ -1,12 +1,10 @@
 
-
 // TODO:
-//   - on page load:
-//     - load the first image in the list into main-img
-//     - load thumbnail images into list list-imgs
-//   - on image click (from list):
-//     - load image clicked into main-img
-
+//   - onload:
+//     - loads full size image into main frame
+//     - loads thumbnails into thumbnail list
+//   - onclick:
+//     - get full size from S3
 
 function on_load() {
   // TODO:
@@ -16,13 +14,15 @@ function on_load() {
   //   - get the number of images in the bucket from the info file
   //   - generate images html with the above info
 
-  var img_tag =
+  var img_tag = "<img class=\"img-responsive\" src=\"%s\" alt=\"Chania\">";
 
-  var main_img = "<img class=\"img-responsive\" src=\"https://s3.amazonaws.com/qfoster/1.jpg\" alt=\"Chania\">";
+  var main_img = "<img class=\"img-responsive\" src=\"https://s3.amazonaws.com/qfoster/sports/1.JPG\">";
+  console.log(main_img);
   document.getElementById("main-img").innerHTML = main_img;
 
-  var num = 11;
-  var list_imgs = "";
-
+  var slide1 = "<div class=\"img-thumbnail\"><img src=\"https://s3.amazonaws.com/qfoster/sports/2.JPG\"></div>"
+  var slide2 = "<div class=\"img-thumbnail\"><img src=\"https://s3.amazonaws.com/qfoster/sports/3.JPG\"></div>"
+  var slide3 = "<div class=\"img-thumbnail\"><img src=\"https://s3.amazonaws.com/qfoster/sports/4.JPG\"></div>"
+  document.getElementById("img-list").innerHTML = slide1 + "\n" + slide2 + "\n" + slide3
 
 }
