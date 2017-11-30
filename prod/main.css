@@ -11,30 +11,7 @@
 
 .container {
   background: black;
-  height: 100%;
-}
-
-.h3-text {
-  color: blue;
-}
-
-.img-list {
-    height: 180px;
-    width: 100%;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-}
-.img-thumbnail {
-    position: relative;
-    display: inline-block;
-    margin: 8px 8px;
-    box-shadow: 2px 2px 4px #bbb;
-    border-top-right-radius: 4px;
-    width: 116px;
-    height: 158px;
-    vertical-align: bottom;
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-size: cover;
+  height: 80%;
+  width: 80%;
+  /*position: center;*/
 }
