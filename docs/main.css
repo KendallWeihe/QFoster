@@ -5,12 +5,13 @@
   width: 100%;
   background-size: cover;
   display: table;
-  background-attachment: fixed;
-  background-image: url(cardboard-flat.png);
+  /*background-attachment: fixed;*/
+  /*background-image: url(cardboard-flat.png);*/
+  background: black;
 }
 
 .container {
-  background: black;
+  /*background: black;*/
   height: 80%;
   width: 80%;
 }
@@ -33,7 +34,7 @@ ul.horizontal-slide {
     padding: 0;
     width: 100%;
     white-space: nowrap;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 ul.horizontal-slide li[class*="col"] {
@@ -54,4 +55,51 @@ ul.horizontal-slide li[class*="col"]:first-child {
 
 #space-std {
   padding-top: 5%;
+}
+
+/*--------------------------------------------*/
+
+.wrapper {
+    position:relative;
+    margin:0 auto;
+    overflow:hidden;
+  	padding:5px;
+  	height:50px;
+}
+
+.list {
+    position:absolute;
+    left:0px;
+    top:0px;
+  	min-width:3000px;
+    margin-top:0px;
+}
+
+.list li{
+	display:table-cell;
+    position:relative;
+    text-align:center;
+    cursor:grab;
+    cursor:-webkit-grab;
+    color:#efefef;
+    vertical-align:middle;
+}
+
+.scroller {
+  text-align:center;
+  cursor:pointer;
+  display:none;
+  padding:7px;
+  padding-top:11px;
+  white-space:no-wrap;
+  vertical-align:middle;
+  background-color:#fff;
+}
+
+.scroller-right{
+  float:right;
+}
+
+.scroller-left {
+  float:left;
 }

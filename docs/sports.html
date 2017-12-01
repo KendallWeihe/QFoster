@@ -9,10 +9,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="main.css">
-    <!-- <script src="node_modules/requirejs/require.js"></script> -->
     <script src="main.js"></script>
   </head>
-  <body onload="on_load();">
+  <!-- <body onload="on_load();"> -->
+  <body>
 
     <div class="bg">
       <!-- NOTE: this is the background container  -->
@@ -56,24 +56,26 @@
           <div class="col-*-12" id="space-std"></div>
         </div>
 
-        <div class="row">
-          <!-- NOTE: img list -->
-            <ul class="horizontal-slide">
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
-              <li class="col-md-2"><img class="thumbnail" src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li>
-            </ul>
-          </div>
+        <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+        <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+        <div class="row wrapper">
+        <!-- NOTE: img list -->
+          <ul class="horizontal-slide list">
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
+            <li class="col-md-1"><img  src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li>
+          </ul>
         </div>
+        <script>load_scrollers();</script>
 
         <div class="row">
           <!-- NOTE: padding -->
