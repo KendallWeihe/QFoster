@@ -1,61 +1,119 @@
+var design;
 
+$( document ).ready(function() {
+  $.getJSON("design.json", function(json) {
+    console.log("Reading JSON file...");
+    console.log(json);
+    design = json;
+  }).done(function(data) {
+    stylize();
+  });
+});
 
-function style_padding() {
-  // var doc_width = document.body.clientWidth;
-  var doc_height = document.body.clientHeight;
-  // console.log("doc_width: " + doc_width);
-  console.log("doc_height: " + doc_height);
+function stylize() {
+  console.log("Styling the web page...");
 
-  var row_pad_height = (doc_height * 0.05);
-  console.log("row_pad_height: " + row_pad_height);
-  var pad_rows = document.getElementsByClassName('row-pad');
-  for (var i=0; i<pad_rows.length; i++) {
-    pad_rows[i].style.height = row_pad_height.toString() + "px";
-    console.log("pad div: " + pad_rows[i]);
+  var physical_window_width = get_physical_width();
+  if (physical_window_width < 8) {
+    generate_grid("mobile");
   }
+  else {
+    generate_grid("desktop");
+  }
+}
+
+function get_physical_width() {
+  var dpi_x = document.getElementById('dpi').offsetWidth;
+  // var width = screen.width / dpi_x;
+  var width = document.body.clientWidth / dpi_x;
+  return width;
 };
 
-function style_navbar() {
+function get_physical_height() {
+  var dpi_y = document.getElementById('dpi').offsetHeight;
+  // var height = screen.height / dpi_y;
+  var height = document.body.clientHeight / dpi_y;
+  return height;
+};
+
+function embed_grid(grid, coordinates) {
+  console.log("Embedding grid...");
+  console.log(grid);
   var doc_width = document.body.clientWidth;
   var doc_height = document.body.clientHeight;
   console.log("doc_width: " + doc_width);
   console.log("doc_height: " + doc_height);
 
-  var nav = document.getElementsByClassName("nav")[0];
-  console.log("nav: " + nav);
-  var nav_height = (doc_height * 0.10);
-  nav.style.height = nav_height.toString() + "px";
+  for (var i=0; i < grid.length; i++) {
+    var grid_obj = grid[i];
+    var class_name = grid_obj.class;    var height, width;
+    console.log(grid_obj);
+    console.log("class_name: " + class_name);
 
-  var location_y = (doc_height * 0.10);
-  var side_padding = (doc_width * 0.40);
-  var link_width = ((doc_width * 0.60) / 5);
-  var nav_links = document.getElementsByClassName("nav-link");
-  console.log("location_y: " + location_y);
-  console.log("side_padding: " + side_padding);
-  console.log("link_width: " + link_width);
-  console.log("nav_links: " + nav_links);
-  console.log("nav_links.length: " + nav_links.length);
-  for (var i=0; i<nav_links.length; i++) {
-    nav_links[i].style.width = link_width.toString() + "px";
-    console.log(nav_links[i].style.width);
+    height = doc_height * (grid_obj.height / 100.0);
+    width = doc_width * (grid_obj.width / 100.0);
+    document.getElementsByClassName(class_name)[0].style.float = "left";
+    document.getElementsByClassName(class_name)[0].style.height = height.toString() + "px";
+    document.getElementsByClassName(class_name)[0].style.width = width.toString() + "px";
 
-    var location_x = ((side_padding / 2) + (i * link_width));
-    console.log("location_x: " + location_x);
-    console.log("location_y: " + location_y);
+    var x, y;
+    x = grid_obj.x;
+    y = grid_obj.y;
+    if (x == 1) {
+      coordinates["previous_x_pixel"] = 0.0;
+    }
 
-    nav_links[i].style.left = location_x.toString() + "px";
-    nav_links[i].style.top = location_y.toString() + "px";
-    console.log(nav_links[i].style.left);
-    console.log(nav_links[i].style.top);
+    document.getElementsByClassName(class_name)[0].style.left = coordinates["starting_x_pixel"] + coordinates["previous_x_pixel"];
+    document.getElementsByClassName(class_name)[0].style.top = coordinates["starting_y_pixel"] + coordinates["previous_y_pixel"];
+    console.log("coordinates[\"previous_x_pixel\"]: " + coordinates["previous_x_pixel"]);
+    console.log("coordinates[\"previous_y_pixel\"]: " + coordinates["previous_y_pixel"]);
+
+    if (grid_obj.hasOwnProperty("sub_grid")) {
+      console.log("sub grid found...");
+      console.log(grid_obj.sub_grid);
+
+      sub_coordinates = {
+        "previous_x_coordinate": 0,
+        "previous_y_coordinate": 0,
+        "starting_x_pixel": coordinates["previous_x_pixel"],
+        "starting_y_pixel": coordinates["starting_y_pixel"],
+        "previous_x_pixel": 0.0,
+        "previous_y_pixel": 0.0
+      }
+
+      embed_grid(grid_obj.sub_grid, sub_coordinates);
+    }
+
+    if (x > coordinates["previous_x_coordinate"]) {
+      coordinates["previous_x_pixel"] += width;
+    }
+
+    if (y > coordinates["previous_y_coordinate"]) {
+      coordinates["previous_y_pixel"] += height;
+    }
+
+    coordinates["previous_x_coordinate"] = x;
+    coordinates["previous_y_coordinate"] = y;
   }
 };
 
-function stylize() {
+function generate_grid(type) {
+  var grid;
+  if (type == "mobile") {
+    grid = design.mobile.grid;
+  }
+  else {
+    grid = design.desktop.grid;
+  }
 
-  style_padding();
-  style_navbar();
+  coordinates = {
+    "previous_x_coordinate": 0,
+    "previous_y_coordinate": 0,
+    "starting_x_pixel": 0.0,
+    "starting_y_pixel": 0.0,
+    "previous_x_pixel": 0.0,
+    "previous_y_pixel": 0.0
+  }
 
+  embed_grid(grid, coordinates);
 };
-
-// TODO:
-//   - if resize: then stylize again
