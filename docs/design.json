@@ -24,11 +24,39 @@
         "width": 80,
         "sub_grid": [
           {
-            "class": "nav-element",
+            "class": "nav-element1",
             "x": 1,
             "y": 1,
-            "list": true,
-            "overflow": false
+            "height": 10,
+            "width": 16
+          },
+          {
+            "class": "nav-element2",
+            "x": 2,
+            "y": 1,
+            "height": 10,
+            "width": 16
+          },
+          {
+            "class": "nav-element3",
+            "x": 3,
+            "y": 1,
+            "height": 10,
+            "width": 16
+          },
+          {
+            "class": "nav-element4",
+            "x": 4,
+            "y": 1,
+            "height": 10,
+            "width": 16
+          },
+          {
+            "class": "nav-element5",
+            "x": 5,
+            "y": 1,
+            "height": 10,
+            "width": 16
           }
         ]
       },
@@ -86,16 +114,7 @@
         "x": 2,
         "y": 6,
         "height": 10,
-        "width": 80,
-        "sub_grid": [
-          {
-            "class": "element",
-            "x": 1,
-            "y": 1,
-            "list": true,
-            "overflow": true
-          }
-        ]
+        "width": 80
       },
       {
         "class": "vpad6",
