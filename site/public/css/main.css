@@ -3,5 +3,59 @@
 html, body {
   margin: 0;
   height: 100%;
+  background: grey;
+}
+
+.container {
+  height: 90%;
+  width: 90%;
+  left: 5%;
+  top: 5%;
   background: black;
+  position: relative;
+}
+
+.nav {
+  width: 80%;
+  height: 10%;
+  left: 10%;
+  top: 5%;
+  position: relative;
+}
+
+.nav-ul {
+  display: inline;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.nav-li {
+  float: left;
+  text-align: center;
+  width: 20%;
+}
+
+.main {
+  width: 80%;
+  height: 60%;
+  left: 10%;
+  top: 10%;
+  position: relative;
+}
+
+.main-slide {
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+  position: relative;
+}
+
+.preview {
+  width: 80%;
+  height: 10%;
+  left: 10%;
+  top: 10%;
+  position: relative;
 }

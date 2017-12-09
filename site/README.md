@@ -17,7 +17,8 @@
       - upload to S3
       - return url
   - https support
-
+  - Python resizing script
+    - upload resized to S3
 
 # S3 layout:
   - sports/

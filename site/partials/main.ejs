@@ -1,42 +1,28 @@
-<!-- # TODO:
-  - get the next three images upon each load
-    - so that mobile users can swipe right -->
-
 <div class="main">
 
   <div class="main-slide" id="sports">
     <!-- TODO: upon clicking a different nav link, update this divs id tag -->
-
   </div>
 
-  <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"></script>
-
   <script>
-    // function get_physical_width() {
-    //   var dpi_x = document.getElementById('dpi').offsetWidth;
-    //   // var width = screen.width / dpi_x;
-    //   var width = document.body.clientWidth / dpi_x;
-    //   return width;
-    // };
-    //
-    // function get_physical_height() {
-    //   var dpi_y = document.getElementById('dpi').offsetHeight;
-    //   // var height = screen.height / dpi_y;
-    //   var height = document.body.clientHeight / dpi_y;
-    //   return height;
-    // };
+    function load_main_img() {
+      var width = document.getElementsByClassName("main-slide")[0].clientWidth;
+      var height = document.getElementsByClassName("main-slide")[0].clientHeight;
 
-    function get_slide_images() {
-      console.log("get_slide_images() called");
+      var contain_px = 0;
+      if (width < height) {
+        contain_px = Math.round(width / 100) * 100;
+      }
+      else if (height < width) {
+        contain_px = Math.round(height / 100) * 100;
+      }
+      else {
+        contain_px = Math.round(width / 100) * 100;
+      }
+
       var host = "http://localhost:3000/main_images";
       var current_album = document.getElementsByClassName('main-slide')[0].id;
-      // var x_dimension = get_physical_width();
-      // var y_dimension = get_physical_height();
-      var x_dimension = document.body.clientWidth;
-      var y_dimension = document.body.clientHeight;
-      var parameters = {album: current_album, x: x_dimension, y: y_dimension};
+      var parameters = {album: current_album, contain_px: contain_px};
 
       $.get(host, parameters, function(data) {
         console.log("RETURN DATA");
@@ -51,16 +37,19 @@
           main_slide.appendChild(div);
         };
       });
-    };
-  </script>
-  <script>get_slide_images();</script>
 
-  <script type="text/javascript">
+      $('.main').slick();
+    };
+
+    load_main_img();
+  </script>
+
+  <!-- <script type="text/javascript">
     $(document).ready(function(){
       $('.main-slide').slick({
         setting-name: setting-value
       });
     });
-  </script>
+  </script> -->
 
 </div>
