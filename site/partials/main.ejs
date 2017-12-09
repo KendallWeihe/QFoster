@@ -1,0 +1,45 @@
+<!-- # TODO:
+  - get the next three images upon each load
+    - so that mobile users can swipe right -->
+
+<div class="main">
+
+  <div class="main-slide" id="sports">
+    <!-- TODO: upon clicking a different nav link, update this divs id tag -->
+
+    <script>
+      function get_slide_images() {
+        console.log("get_slide_images() called");
+        var host = "http://localhost:3000/main_images";
+        var current_album = document.getElementsByClassName('main-slide')[0].id;
+        var x_dimension = 100;
+        var y_dimension = 100;
+        var parameters = {album: current_album, x: x_dimension, y: y_dimension};
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+
+        $.get(host, parameters, function(data) {
+          console.log(data); // note: this should return a list of <div><img></div> tags
+        });
+      };
+    </script>
+    <script>get_slide_images();</script>
+
+  </div>
+
+  <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.main-slide').slick({
+        setting-name: setting-value
+      });
+    });
+  </script>
+
+</div>
