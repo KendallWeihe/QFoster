@@ -7,32 +7,53 @@
   <div class="main-slide" id="sports">
     <!-- TODO: upon clicking a different nav link, update this divs id tag -->
 
-    <script>
-      function get_slide_images() {
-        console.log("get_slide_images() called");
-        var host = "http://localhost:3000/main_images";
-        var current_album = document.getElementsByClassName('main-slide')[0].id;
-        var x_dimension = 100;
-        var y_dimension = 100;
-        var parameters = {album: current_album, x: x_dimension, y: y_dimension};
-        console.log();
-        console.log();
-        console.log();
-        console.log();
-        console.log();
-
-        $.get(host, parameters, function(data) {
-          console.log(data); // note: this should return a list of <div><img></div> tags
-        });
-      };
-    </script>
-    <script>get_slide_images();</script>
-
   </div>
 
   <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"></script>
+
+  <script>
+    // function get_physical_width() {
+    //   var dpi_x = document.getElementById('dpi').offsetWidth;
+    //   // var width = screen.width / dpi_x;
+    //   var width = document.body.clientWidth / dpi_x;
+    //   return width;
+    // };
+    //
+    // function get_physical_height() {
+    //   var dpi_y = document.getElementById('dpi').offsetHeight;
+    //   // var height = screen.height / dpi_y;
+    //   var height = document.body.clientHeight / dpi_y;
+    //   return height;
+    // };
+
+    function get_slide_images() {
+      console.log("get_slide_images() called");
+      var host = "http://localhost:3000/main_images";
+      var current_album = document.getElementsByClassName('main-slide')[0].id;
+      // var x_dimension = get_physical_width();
+      // var y_dimension = get_physical_height();
+      var x_dimension = document.body.clientWidth;
+      var y_dimension = document.body.clientHeight;
+      var parameters = {album: current_album, x: x_dimension, y: y_dimension};
+
+      $.get(host, parameters, function(data) {
+        console.log("RETURN DATA");
+        console.log(data); // note: this should return a list of <div><img></div> tags
+        var main_slide = document.getElementsByClassName("main-slide")[0];
+        var srcs = data.split("|");
+        for (var i=0; i < srcs.length - 1; i++) {
+          var div = document.createElement("div");
+          var img = document.createElement("img");
+          img.src = srcs[i];
+          div.appendChild(img);
+          main_slide.appendChild(div);
+        };
+      });
+    };
+  </script>
+  <script>get_slide_images();</script>
 
   <script type="text/javascript">
     $(document).ready(function(){
