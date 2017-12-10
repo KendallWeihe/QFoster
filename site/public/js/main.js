@@ -2,6 +2,13 @@ function load_main_img() {
   var width = document.getElementsByClassName("main-slide")[0].clientWidth;
   var height = document.getElementsByClassName("main-slide")[0].clientHeight;
 
+  // TODO:
+  //   - if width < height:
+  //     - contain via width
+  //     - round to the nearest 50
+  //   - ...
+  //   - pass the contain dim to the server
+
   var contain_px = 0;
   if (width < height) {
     contain_px = Math.round(width / 100) * 100;
@@ -16,6 +23,10 @@ function load_main_img() {
   var host = "http://localhost:3000/main_images";
   var current_album = document.getElementsByClassName('main-slide')[0].id;
   var parameters = {album: current_album, contain_px: contain_px};
+
+  TODO:
+    - get along the larger dimension + 100
+    - use canvas to fit the image to the area
 
   $.get(host, parameters, function(data) {
     console.log("RETURN DATA");

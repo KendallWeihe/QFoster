@@ -1,3 +1,7 @@
+# TODO:
+#     - resize along dimension
+#     - resize by 50px
+
 import os
 import pdb
 import sys
@@ -11,29 +15,26 @@ if (len(sys.argv) != 2):
     print("usage: python resize.py <root_to_portfolio>")
     sys.exit()
 
-def resize(path, px):
+def resize(path, px, dim):
     img = cv2.imread(path)
     img_h, img_w = img.shape[:2]
 
-    if img_w > img_h:
+    if dim == "x":
         new_w = px
         new_h = (new_w * img_h) / img_w
-    elif img_h > img_w:
+    elif dim == "y":
         new_h = px
         new_w = (new_h * img_w) / img_h
-    else:
-        new_w = px
-        new_h = px
     img_resized = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_CUBIC)
 
-    resized_path = "{}resized/{}".format(root_path, px)
+    resized_path = "{}resized/{}-{}".format(root_path, px, dim)
     try:
         mk_path = resized_path
         os.mkdir(mk_path)
     except:
         pass
 
-    resized_path = "{}resized/{}{}".format(root_path, px, path.split(root_path)[1])
+    resized_path = "{}resized/{}-{}{}".format(root_path, px, dim, path.split(root_path)[1])
     try:
         mk_path = resized_path[0:resized_path.rfind("/")]
         os.mkdir(mk_path)
@@ -41,17 +42,21 @@ def resize(path, px):
         pass
     cv2.imwrite(resized_path, img_resized)
 
-def recursive_file_search(path, contain_px):
+def recursive_file_search(path, contain_px, contain_dim):
     objects = os.listdir(path)
     for obj in objects:
         new_path = "{}/{}".format(path, obj)
         if os.path.isfile(new_path) and ".jpg" in obj.lower():
-            resize(new_path, contain_px)
+            resize(new_path, contain_px, contain_dim)
         elif "resized" not in new_path and os.path.isdir(new_path):
-            recursive_file_search(new_path, contain_px)
+            recursive_file_search(new_path, contain_px, contain_dim)
 
 root_path = sys.argv[1]
 
-for contain_px in range(100, 2500, 100):
+for contain_px in range(50, 2500, 50):
     print("Resizing to be contained withing {} px...".format(contain_px))
-    recursive_file_search(root_path, contain_px)
+    recursive_file_search(root_path, contain_px, "x")
+
+for contain_px in range(50, 2500, 50):
+    print("Resizing to be contained withing {} px...".format(contain_px))
+    recursive_file_search(root_path, contain_px, "y")
