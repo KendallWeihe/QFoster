@@ -25,18 +25,18 @@ app.get('/main_images', function (req, res) {
   let contain_px = parseInt(req.query.contain_px, 10);
 
   let s3 = new AWS.S3();
+  let path = util.format("resized/%d/%s", contain_px, album);
+  console.log(path);
   let params = {
-    Bucket: "qfoster"
+    Bucket: "qfoster",
+    Prefix: path
   };
   console.log(params);
 
-  let path = util.format("resized/%d/%s", contain_px, album);
-  console.log(path);
   s3.listObjects(params, function(err, bucket_objects) {
     let num_objects = 0;
 
     bucket_objects.Contents.forEach(function(object) {
-      console.log(object["Key"]);
       if (object["Size"] == 0) {
         return
       }
@@ -55,7 +55,6 @@ app.get('/main_images', function (req, res) {
 
       if (object["Key"].includes(path)) {
         count += 1;
-        console.log("Count: ", count);
         let src_string = util.format("https://s3.amazonaws.com/qfoster/%s|", object.Key);
         res.write(src_string);
         if (count == num_objects) {
@@ -64,6 +63,8 @@ app.get('/main_images', function (req, res) {
       }
     });
   });
+
+
 });
 
 app.get('/thumbnails', function (req, res) {
@@ -73,13 +74,14 @@ app.get('/thumbnails', function (req, res) {
   let contain_px = parseInt(req.query.contain_px, 10);
 
   let s3 = new AWS.S3();
+  let path = util.format("resized_thumbnails/%d/%s", contain_px, album);
+  console.log(path);
   let params = {
-    Bucket: "qfoster"
+    Bucket: "qfoster",
+    Prefix: path
   };
   console.log(params);
 
-  let path = util.format("resized_thumbnails/%d/%s", contain_px, album);
-  console.log(path);
   s3.listObjects(params, function(err, bucket_objects) {
     let num_objects = 0;
 
@@ -100,10 +102,8 @@ app.get('/thumbnails', function (req, res) {
         return
       }
 
-      // console.log(object["Key"]);
       if (object["Key"].includes(path)) {
         count += 1;
-        console.log("Count: ", count);
         let src_string = util.format("https://s3.amazonaws.com/qfoster/%s|", object.Key);
         res.write(src_string);
         if (count == num_objects) {
@@ -112,6 +112,7 @@ app.get('/thumbnails', function (req, res) {
       }
     });
   });
+
 });
 
 app.listen(3000, function () {

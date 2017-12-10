@@ -75,8 +75,7 @@ function load_thumbnails() {
       dots: true,
       variableWidth: true,
       padding: "5px",
-      infinite: true,
-      asNavFor: '.main-slide'
+      infinite: true
     });
   });
 };
