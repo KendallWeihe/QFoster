@@ -1,22 +1,43 @@
-# QFoster
-Website for Quinn Foster
+# README:
 
-# General design:
-- GitHub pages
-  - Quinn has his own account
-  - ...forks this repo?
-- Custom domain name
-- Hugo website:
-  - [PHugo theme](https://themes.gohugo.io/phugo/)
-  - [Demo](https://themes.gohugo.io/theme/phugo/)
+...
 
-# The actual site:
-
-[Currently linked here](https://kendallweihe.github.io/QFoster/)
+# Logic flow:
+  - / returns
+    - home page of choice (sports)
+    -
 
 # TODO:
-- clone Hugo theme above ^^^
-- create an album
-- run local hugo server
-- get familiar with Theme
-- how do I build the theme into static files that GitHub pages can use?
+  - S3 for now... as opposed to EBS
+    - client request
+      - pass dimensions
+    - node server
+      - get image from S3
+      - resize
+      - upload to S3
+      - return url
+  - https support
+  - Python resizing script
+    - upload resized to S3
+
+# S3 layout:
+  - sports/
+    - info.json
+    - original/
+    - 100x100/
+    - 250x500/
+  - italy/
+  - ...
+
+### info.json:
+  ```
+    {
+      existing_images: [
+        {
+          x: 100,
+          y: 100,
+          key: "sports/100x100"
+        }
+      ]
+    }
+  ```

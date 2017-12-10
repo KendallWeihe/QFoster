@@ -1,0 +1,118 @@
+{
+  "mobile": {
+
+  },
+  "desktop": {
+    "grid": [
+      {
+        "class": "hpad",
+        "x": 1,
+        "y": 1,
+        "width": 100,
+        "height": 5
+      },
+      {
+        "class": "vpad",
+        "x": 1,
+        "y": 2,
+        "width": 10,
+        "height": 10
+      }
+      {
+        "class": "nav",
+        "x": 2,
+        "y": 2,
+        "height": 10,
+        "width": 80,
+        "sub-grid": [
+          {
+            "class": "nav-element",
+            "x": 1,
+            "y": 1,
+            "list": true,
+            "overflow": false
+          }
+        ]
+      },
+      {
+        "class": "vpad",
+        "x": 3,
+        "y": 2,
+        "width": 10,
+        "height": 10
+      },
+      {
+        "class": "hpad",
+        "x": 1,
+        "y": 3,
+        "width": 100,
+        "height": 5
+      },
+      {
+        "class": "vpad",
+        "x": 1,
+        "y": 4,
+        "height": 60,
+        "width": 10
+      },
+      {
+        "class": "main",
+        "x": 2,
+        "y": 4,
+        "height": 60,
+        "width": 80
+      },
+      {
+        "class": "vpad",
+        "x": 3,
+        "y": 4,
+        "height": 60,
+        "width": 10
+      },
+      {
+        "class": "hpad",
+        "x": 1,
+        "y": 5,
+        "width": 100,
+        "height": 5
+      },
+      {
+        "class": "vpad",
+        "x": 1,
+        "y": 6,
+        "height": 10,
+        "width": 10
+      },
+      {
+        "class": "list",
+        "x": 2,
+        "y": 6,
+        "height": 10,
+        "width": 80,
+        "sub-grid": [
+          {
+            "class": "element",
+            "x": 1,
+            "y": 1,
+            "list": true,
+            "overflow": true
+          }
+        ]
+      },
+      {
+        "class": "vpad",
+        "x": 3,
+        "y": 6,
+        "height": 10,
+        "width": 10
+      },
+      {
+        "class": "hpad",
+        "x": 1,
+        "y": 7,
+        "width": 100,
+        "height": 5
+      }
+    ]
+  }
+}

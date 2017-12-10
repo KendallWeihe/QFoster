@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>QFoster Reflections</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+  </head>
+  <!-- <body onload="on_load();"> -->
+  <body>
+    <div id="dpi" style="height: 1in; width: 1in; left: 100%; position: fixed; top: 100%;"></div>
+    <div class="bg">
+      <!-- NOTE: this is the background container  -->
+      <div class="container">
+        <!-- NOTE: this is the photo gallery background container -->
+
+        <div class="row-pad"></div>
+
+        <div class="nav">
+          <div class="nav-link"><a class="sports-link" href="#">Sports</a></div>
+          <div class="nav-link"><a class="portraits-link" href="#">Portraits</a></div>
+          <div class="nav-link"><a class="qf-link" href="#">QF</a></div>
+          <div class="nav-link"><a class="italy-link" href="#">Italy</a></div>
+          <div class="nav-link"><a class="reflections-link" href="#">Reflections</a></div>
+        </div>
+
+        <div class="row-pad"></div>
+
+        <div class="row">
+          <!-- NOTE: main image -->
+          <div class="col-*-2"></div>
+          <div class="col-*-8">
+            <!-- <img class="img-responsive" src="https://s3.amazonaws.com/qfoster/sports/1.JPG" id="main-img"> -->
+          </div>
+          <div class="col-*-2"></div>
+        </div>
+
+        <div class="row-pad"></div>
+
+        <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+        <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+        <div class="row wrapper">
+        <!-- NOTE: img list -->
+          <ul class="horizontal-slide list">
+            <!-- <li class="col-*-2"><img  src="https://s3.amazonaws.com/qfoster/sports/2.JPG" id="thumbnail-img"/></li>
+            <li class="col-*-2"><img  src="https://s3.amazonaws.com/qfoster/sports/3.JPG" id="thumbnail-img"/></li>
+            <li class="col-*-2"><img  src="https://s3.amazonaws.com/qfoster/sports/4.JPG" id="thumbnail-img"/></li>
+            <li class="col-*-2"><img  src="https://s3.amazonaws.com/qfoster/sports/5.JPG" id="thumbnail-img"/></li> -->
+          </ul>
+        </div>
+
+        <div class="row">
+          <!-- NOTE: padding -->
+          <div class="col-*-12" id="space-std"></div>
+        </div>
+
+        <script>stylize();</script>
+
+      </div>
+    </div>
+
+  </body>
+</html>

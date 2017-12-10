@@ -1,0 +1,92 @@
+
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: grey;
+}
+
+.container {
+  width: 90%;
+  height: 90%;
+  background: black;
+  margin: auto;
+  position: absolute;
+}
+
+.nav {
+  width: 80%;
+  height: 10%;
+  margin: auto;
+  position: absolute;
+}
+
+.main {
+  width: 80%;
+  height: 60%;
+  margin: auto;
+  position: absolute;
+}
+
+.preview {
+  width: 80%;
+  height: 20%;
+  margin: auto;
+  position: absolute;
+}
+
+.nav-ul {
+  display: inline;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.nav-li {
+  float: left;
+  text-align: center;
+  width: 20%;
+}
+
+.main-slide {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.main-slide-img {
+  margin: auto;
+}
+
+.preview-slide {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.preview-slide-img {
+  margin: auto;
+}
+
+.slick-list {
+  height: 100%;
+}
+
+.slick-track {
+  height: 100%;
+}
+
+.slick-track > div > div {
+  height: 100%;
+}
+
+.slick-track > div > div > div {
+  height: 100%;
+}
+
+.slick-track > div > div > div > img {
+  height: 100%;
+}
