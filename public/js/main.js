@@ -13,7 +13,7 @@ function load_main_img() {
     contain_px = (Math.round(height / 100) * 100) + 50;
   }
 
-  var host = "http://localhost:3000/main_images";
+  var host = "http://34.204.68.57:3000/main_images";
   var current_album = document.getElementsByClassName('main-slide')[0].id;
   var parameters = {album: current_album, contain_px: contain_px};
 
@@ -37,9 +37,15 @@ function load_main_img() {
     console.log("main-slide...");
     $('.main-slide').slick({
       centerMode: true,
+      centerPadding: '0',
       slidesToShow: 1,
+      infinite: true,
+      accessibility: true,
       arrows: false,
-      infinite: true
+      focusOnChange: true,
+      swipeToSlide: true,
+      cssEase: 'linear',
+      fade: true
     });
   });
 };
@@ -47,7 +53,7 @@ function load_main_img() {
 function load_thumbnails() {
   var height = document.getElementsByClassName("preview-slide")[0].clientHeight;
   var contain_px = (Math.round(height / 10) * 10) + 10;
-  var host = "http://localhost:3000/thumbnails";
+  var host = "http://34.204.68.57:3000/thumbnails";
   var current_album = document.getElementsByClassName('preview-slide')[0].id;
   var parameters = {album: current_album, contain_px: contain_px};
 
@@ -72,7 +78,7 @@ function load_thumbnails() {
     $('.preview-slide').slick({
       slidesToShow: 5,
       arrows: false,
-      dots: true,
+      dots: false,
       variableWidth: true,
       padding: "5px",
       infinite: true

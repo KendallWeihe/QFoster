@@ -62,13 +62,19 @@ html, body {
 
 .preview-slide {
   width: 100%;
-  height: 100%;
+  height: 80%;
   position: relative;
   margin: auto;
+  top: calc(20%);
 }
 
 .preview-slide-img {
   margin: auto;
+}
+
+.slick-slide {
+  margin: 0 10px;  
+  outline: none;
 }
 
 .slick-list {
@@ -89,4 +95,5 @@ html, body {
 
 .slick-track > div > div > div > img {
   height: 100%;
+  width: 100%;
 }
