@@ -1,16 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const request = require('request');
-const app = express()
-const util = require('util')
-const download = require('image-downloader')
-const image_size = require('image-size');
-const sharp = require('sharp');
+const util = require('util');
 const AWS = require('aws-sdk');
-const Sync = require('sync');
+
+const app = express();
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 
