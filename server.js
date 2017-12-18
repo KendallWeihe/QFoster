@@ -4,6 +4,14 @@ const AWS = require('aws-sdk');
 
 const app = express();
 
+const access_key = process.env.AWS_ACCESS_KEY_ID;
+const secret_key = process.env.AWS_SECRET_ACCESS_KEY;
+
+AWS.config = new AWS.Config();
+AWS.config.accessKeyId = access_key;
+AWS.config.secretAccessKey = secret_key;
+AWS.config.region = "us-east-1";
+
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
@@ -28,6 +36,10 @@ app.get('/main_images', function (req, res) {
   console.log(params);
 
   s3.listObjects(params, function(err, bucket_objects) {
+    if (err) {
+      throw err;
+    }
+
     let num_objects = 0;
 
     bucket_objects.Contents.forEach(function(object) {

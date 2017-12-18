@@ -13,7 +13,8 @@ function load_main_img() {
     contain_px = (Math.round(height / 100) * 100) + 50;
   }
 
-  var host = "http://34.204.68.57:3000/main_images";
+  // var host = "http://34.204.68.57:3000/main_images";
+  var host = "http://localhost:3000/main_images";
   var current_album = document.getElementsByClassName('main-slide')[0].id;
   var parameters = {album: current_album, contain_px: contain_px};
 
@@ -41,14 +42,20 @@ function load_main_img() {
       slidesToShow: 1,
       infinite: true,
       accessibility: true,
-      arrows: false,
-      focusOnChange: true,
+      // arrows: false,
       swipeToSlide: true,
       cssEase: 'linear',
-      fade: true
+      fade: true,
+      dots: true,
+      mobileFirst: true,
+      touchThreshold: 8
     });
+
+    $(document).find('.slick-list').attr('tabindex', 0).focus();
   });
 };
+
+
 
 function load_thumbnails() {
   var height = document.getElementsByClassName("preview-slide")[0].clientHeight;
@@ -105,7 +112,7 @@ function stylize(){
   var main_y = nav_y + (height * 0.10);
   document.getElementsByClassName("main")[0].style.transform = "translate(" + main_x.toString() + "px, " + main_y.toString() + "px)";
 
-  var preview_x = width * 0.10;
-  var preview_y = main_y + (height * 0.60);
-  document.getElementsByClassName("preview")[0].style.transform = "translate(" + preview_x.toString() + "px, " + preview_y.toString() + "px)";
+  // var preview_x = width * 0.10;
+  // var preview_y = main_y + (height * 0.60);
+  // document.getElementsByClassName("preview")[0].style.transform = "translate(" + preview_x.toString() + "px, " + preview_y.toString() + "px)";
 };
