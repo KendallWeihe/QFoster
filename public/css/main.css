@@ -68,12 +68,14 @@ html, body {
   position: absolute;
 }
 
+/*
 .preview {
   width: 80%;
   height: 20%;
   margin: auto;
   position: absolute;
 }
+*/
 
 .nav-ul {
   display: inline;
