@@ -24,7 +24,7 @@ html, body {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   text-align: center;
-  font-size: 5vh;
+  font-size: 3vw;
   font-family: Didot, "Didot LT STD";
   font-style: italic;
 }
