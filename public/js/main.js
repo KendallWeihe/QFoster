@@ -48,14 +48,24 @@ function load_main_img() {
       fade: true,
       dots: true,
       mobileFirst: true,
-      touchThreshold: 8
+      touchThreshold: 12
     });
 
     $(document).find('.slick-list').attr('tabindex', 0).focus();
+    var num_dots = document.getElementsByClassName("slick-dots")[0].getElementsByTagName("li").length;
+    var dots_spacing = ((width * 0.9) / num_dots) / 4;
+    console.log(dots_spacing);
+    var ul = document.getElementsByClassName("slick-dots")[0];
+    var items = ul.getElementsByTagName("li");
+    console.log(items);
+    for (var i = 0; i < items.length; ++i) {
+      // items[i].style.marginLeft = dots_spacing;
+      // items[i].style.marginRight = dots_spacing;
+      items[i].style.margin = "0 " + dots_spacing.toString() + "px";
+      console.log(items[i]);
+    }
   });
 };
-
-
 
 function load_thumbnails() {
   var height = document.getElementsByClassName("preview-slide")[0].clientHeight;
@@ -105,7 +115,7 @@ function stylize(){
   height = height * 0.90;
 
   var nav_x = width * 0.10;
-  var nav_y = height * 0.05;
+  var nav_y = height * 0.03;
   document.getElementsByClassName("nav")[0].style.transform = "translate(" + nav_x.toString() + "px, " + nav_y.toString() + "px)";
 
   var main_x = width * 0.10;

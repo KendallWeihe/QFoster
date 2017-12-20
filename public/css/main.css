@@ -42,8 +42,8 @@ html, body {
 .logo-link {
   grid-column: 3 / 4;
   color: white;
-  height: 5vw;
-  transform: translateY(-15%);
+  height: 13vw;
+  transform: translateY(-35%);
 }
 
 /* .logo-link:hover {
@@ -64,6 +64,14 @@ html, body {
   grid-column: 5 / 6;
   color: white;
 }
+
+.slick-dots {
+  transform: translateY(2vh);
+}
+
+/*.slick-dots > li {
+  margin: 0 2vw;
+}*/
 
 .slick-dots li button:before {
   color: blue;
