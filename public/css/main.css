@@ -39,12 +39,12 @@ a:active {
   font-style: italic;
 }
 
-.sports-link {
+.reflections-link-link {
   grid-column: 1 / 2;
   color: white;
 }
 
-.portfolio-link {
+.sports-link {
   grid-column: 2 / 3;
   color: white;
 }
@@ -65,7 +65,7 @@ a:active {
     transform: scaleY(-1);
 }
 
-.reflections-link {
+.portraits-link {
   grid-column: 4 / 5;
   color: white;
 }
