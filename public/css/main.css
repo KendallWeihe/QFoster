@@ -154,3 +154,12 @@ a:active {
   height: 100%;
   width: 100%;
 }
+
+.copyright {
+  position: absolute;
+  top: 98%;
+  left: 1%;
+  font-size: 1.25vh;
+  width: 99%;
+  text-align: center;
+}
