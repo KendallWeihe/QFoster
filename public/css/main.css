@@ -7,6 +7,15 @@ html, body {
   background: grey;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:active {
+  color: grey;
+}
+
 .container {
   width: 90%;
   height: 90%;
@@ -17,12 +26,13 @@ html, body {
 
 .nav {
   width: 80%;
-  height: 10%;
+  height: 7%;
   margin: auto;
   position: absolute;
 
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 100%;
   text-align: center;
   font-size: 3vw;
   font-family: Didot, "Didot LT STD";
@@ -66,7 +76,7 @@ html, body {
 }
 
 .slick-dots {
-  transform: translateY(2vh);
+  transform: translateY(1.5vh);
 }
 
 /*.slick-dots > li {
@@ -74,7 +84,7 @@ html, body {
 }*/
 
 .slick-dots li button:before {
-  color: blue;
+  color: grey;
   font-size: 2vh;
   line-height: 2vh;
   padding-top: 2%;
@@ -82,7 +92,7 @@ html, body {
 
 .main {
   width: 80%;
-  height: 80%;
+  height: 82.5%;
   margin: auto;
   position: absolute;
 }
@@ -95,19 +105,6 @@ html, body {
   position: absolute;
 }
 */
-
-.nav-ul {
-  display: inline;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-}
-
-.nav-li {
-  float: left;
-  text-align: center;
-  width: 20%;
-}
 
 .main-slide {
   width: 100%;

@@ -13,8 +13,7 @@ function load_main_img() {
     contain_px = (Math.round(height / 100) * 100) + 50;
   }
 
-  // var host = "http://34.204.68.57:3000/main_images";
-  var host = "http://localhost:3000/main_images";
+  var host = "http://localhost:3000/sports";
   var current_album = document.getElementsByClassName('main-slide')[0].id;
   var parameters = {album: current_album, contain_px: contain_px};
 
@@ -48,7 +47,7 @@ function load_main_img() {
       fade: true,
       dots: true,
       mobileFirst: true,
-      touchThreshold: 12
+      touchThreshold: 15
     });
 
     $(document).find('.slick-list').attr('tabindex', 0).focus();
@@ -114,12 +113,18 @@ function stylize(){
   width = width * 0.90;
   height = height * 0.90;
 
+  // TODO:
+  //   - get number of pixels in between top of container and top of main image
+  //   - get height of <a>
+  //   - position
+      // - 1px = (100vw / 500px) = 0.2vw
+
   var nav_x = width * 0.10;
   var nav_y = height * 0.03;
   document.getElementsByClassName("nav")[0].style.transform = "translate(" + nav_x.toString() + "px, " + nav_y.toString() + "px)";
 
   var main_x = width * 0.10;
-  var main_y = nav_y + (height * 0.10);
+  var main_y = nav_y + (height * 0.075);
   document.getElementsByClassName("main")[0].style.transform = "translate(" + main_x.toString() + "px, " + main_y.toString() + "px)";
 
   // var preview_x = width * 0.10;
