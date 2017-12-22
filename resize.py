@@ -11,18 +11,6 @@ if (len(sys.argv) != 2):
     print("usage: python resize.py <root_to_portfolio>")
     sys.exit()
 
-# NOTE: the logic
-#     - find the larger dimension on the client side
-#     - add some buffer space to it
-#     - pass it to client
-#     - images are resized from the larger dimension
-#     - server always returns an image slightly larger
-#     - client then resizes using css object-fit
-
-if (len(sys.argv) != 2):
-    print("usage: python resize.py <root_to_portfolio>")
-    sys.exit()
-
 def resize(path, px):
     img = cv2.imread(path)
     img_h, img_w = img.shape[:2]
@@ -38,14 +26,14 @@ def resize(path, px):
         new_h = px
     img_resized = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_CUBIC)
 
-    resized_path = "{}resized_thumbnail/{}".format(root_path, px)
+    resized_path = "{}resized/{}".format(root_path, px)
     try:
         mk_path = resized_path
         os.mkdir(mk_path)
     except:
         pass
 
-    resized_path = "{}resized_thumbnail/{}{}".format(root_path, px, path.split(root_path)[1])
+    resized_path = "{}resized/{}{}".format(root_path, px, path.split(root_path)[1])
     try:
         mk_path = resized_path[0:resized_path.rfind("/")]
         os.mkdir(mk_path)
@@ -64,6 +52,6 @@ def recursive_file_search(path, contain_px):
 
 root_path = sys.argv[1]
 
-for contain_px in range(10, 500, 10):
+for contain_px in range(100, 2500, 50):
     print("Resizing to be contained withing {} px...".format(contain_px))
     recursive_file_search(root_path, contain_px)
