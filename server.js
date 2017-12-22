@@ -32,6 +32,8 @@ server.listen(443, function () {
 });
 
 app.get('/', function (req, res) {
+  console.log(req.headers);
+  
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
@@ -41,6 +43,8 @@ app.get('/', function (req, res) {
 })
 
 app.get("/sports", function(req, res) {
+  console.log(req.headers);
+  
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
@@ -53,6 +57,8 @@ app.get("/sports", function(req, res) {
 })
 
 app.get("/portraits", function(req, res) {
+  console.log(req.headers);
+  
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
@@ -65,6 +71,8 @@ app.get("/portraits", function(req, res) {
 })
 
 app.get("/reflections", function(req, res) {
+  console.log(req.headers);
+  
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
@@ -77,6 +85,8 @@ app.get("/reflections", function(req, res) {
 })
 
 app.get("/italy", function(req, res) {
+  console.log(req.headers);
+  
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
