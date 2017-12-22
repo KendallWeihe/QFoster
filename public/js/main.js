@@ -56,7 +56,7 @@ function load_main_img(current_album) {
     contain_px = (Math.round(height / 100) * 100) + 50;
   }
 
-  var host = "https://localhost/" + current_album;
+  var host = "https://quinnfostersreflection.com/" + current_album;
   var parameters = {album: current_album, contain_px: contain_px};
 
   console.log("Main parameters: ", parameters);
