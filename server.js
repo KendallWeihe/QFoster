@@ -6,8 +6,8 @@ var fs = require('fs');
 var https = require('https');
 
 var options = {
-  key: fs.readFileSync( 'encrypt/localhost.key' ),
-  cert: fs.readFileSync( 'encrypt/localhost.cert' ),
+  key: fs.readFileSync( 'encrypt/quinnfostersreflection.com.key' ),
+  cert: fs.readFileSync( 'encrypt/quinnfostersreflection.com.cert' ),
   requestCert: false,
   rejectUnauthorized: false
 };
