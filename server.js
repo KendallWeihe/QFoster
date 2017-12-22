@@ -96,7 +96,7 @@ app.get("/italy", function(req, res) {
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
-    images("reflections", req.query.contain_px, function(ret_string) {
+    images("italy", req.query.contain_px, function(ret_string) {
       res.write(ret_string);
       res.end();
     });
