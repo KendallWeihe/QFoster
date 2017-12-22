@@ -33,69 +33,74 @@ server.listen(443, function () {
 
 app.get('/', function (req, res) {
   console.log(req.headers);
-  
+
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
-
-  res.render("index");
+  else {
+    res.render("index");
+  }
 })
 
 app.get("/sports", function(req, res) {
   console.log(req.headers);
-  
+
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
-
-  images("sports", req.query.contain_px, function(ret_string) {
-    res.write(ret_string);
-    res.end();
-  });
+  else {
+    images("sports", req.query.contain_px, function(ret_string) {
+      res.write(ret_string);
+      res.end();
+    });
+  }
 })
 
 app.get("/portraits", function(req, res) {
   console.log(req.headers);
-  
+
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
-
-  images("portraits", req.query.contain_px, function(ret_string) {
-    res.write(ret_string);
-    res.end();
-  });
+  else {
+    images("portraits", req.query.contain_px, function(ret_string) {
+      res.write(ret_string);
+      res.end();
+    });
+  }
 })
 
 app.get("/reflections", function(req, res) {
   console.log(req.headers);
-  
+
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
-
-  images("reflections", req.query.contain_px, function(ret_string) {
-    res.write(ret_string);
-    res.end();
-  });
+  else {
+    images("reflections", req.query.contain_px, function(ret_string) {
+      res.write(ret_string);
+      res.end();
+    });
+  }
 })
 
 app.get("/italy", function(req, res) {
   console.log(req.headers);
-  
+
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
-
-  images("italy", req.query.contain_px, function(ret_string) {
-    res.write(ret_string);
-    res.end();
-  });
+  else {
+    images("reflections", req.query.contain_px, function(ret_string) {
+      res.write(ret_string);
+      res.end();
+    });
+  }
 })
 
 app.get("/health", function(req, res) {
