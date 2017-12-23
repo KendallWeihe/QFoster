@@ -1,6 +1,7 @@
 const express = require('express');
 const util = require('util');
 const AWS = require('aws-sdk');
+const log = require('simple-node-logger').createSimpleLogger('info.log');
 
 var fs = require('fs');
 var https = require('https');
@@ -29,13 +30,16 @@ app.use(express.static(__dirname + '/public'))
 var server = https.createServer( options, app );
 server.listen(443, function () {
     console.log( 'Express server listening on port ' + server.address().port );
+    log.info( 'Express server listening on port ' + server.address().port );
 });
 
 app.get('/', function (req, res) {
   console.log(req.headers);
+  log.info(req.headers);
 
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
@@ -45,9 +49,11 @@ app.get('/', function (req, res) {
 
 app.get("/sports", function(req, res) {
   console.log(req.headers);
+  log.info(req.headers);
 
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
@@ -60,9 +66,11 @@ app.get("/sports", function(req, res) {
 
 app.get("/portraits", function(req, res) {
   console.log(req.headers);
+  log.info(req.headers);
 
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
@@ -75,9 +83,11 @@ app.get("/portraits", function(req, res) {
 
 app.get("/reflections", function(req, res) {
   console.log(req.headers);
+  log.info(req.headers);
 
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
@@ -90,6 +100,7 @@ app.get("/reflections", function(req, res) {
 
 app.get("/italy", function(req, res) {
   console.log(req.headers);
+  log.info(req.headers);
 
   if (req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
@@ -115,11 +126,13 @@ var images = function(album, contain_px_param, callback) {
   let s3 = new AWS.S3();
   let path = util.format("resized/%d/%s", contain_px, album);
   console.log(path);
+  log.info(path);
   let params = {
     Bucket: "qfoster",
     Prefix: path
   };
   console.log(params);
+  log.info(params);
 
   s3.listObjects(params, function(err, bucket_objects) {
     if (err) {
@@ -139,6 +152,7 @@ var images = function(album, contain_px_param, callback) {
     });
 
     console.log("Num objects: ", num_objects);
+    log.info("Num objects: ", num_objects);
     let count = 0;
     bucket_objects.Contents.forEach(function(object) {
       if (object["Size"] == 0) {

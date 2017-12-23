@@ -12,6 +12,7 @@
     "imagesize": "^1.0.0",
     "jquery": "^3.2.1",
     "sharp": "^0.18.4",
+    "simple-node-logger": "^0.93.33",
     "sleep": "^5.1.1",
     "slick-carousel": "^1.8.1",
     "sync": "^0.2.5",
