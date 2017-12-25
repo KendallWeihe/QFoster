@@ -1,43 +1,36 @@
-# README:
 
-...
+# Primary tools used:
+  - NodeJS & Express
+  - HTML
+  - JavaScript
+  - CSS
+  - AWS
+    - image storage
+    - hosting
+    - load balancing
+    - DNS resolution
+  - tmux
 
-# Logic flow:
-  - / returns
-    - home page of choice (sports)
-    -
+# Setup:
+  - `git clone ...`
+  - `npm install`
+  - TLS things:
+    - generate key: `openssl genrsa -out <name>.key 2048`
+    - generate cert: `openssl req -new -x509 -key <name>.key -out <name>.cert -days 3650 -subj /CN=<name>`
+
+# Handle images
+  - `resize.py` resizes photos for S3
+    - upload manually (currently)
+  - `delete.py` removes photo from S3
+
+# Start server:
+  - `sudo KEY=<path>/<name>.key CERT=<path>/<name>.cert node server.js`
 
 # TODO:
-  - S3 for now... as opposed to EBS
-    - client request
-      - pass dimensions
-    - node server
-      - get image from S3
-      - resize
-      - upload to S3
-      - return url
-  - https support
-  - Python resizing script
-    - upload resized to S3
-
-# S3 layout:
-  - sports/
-    - info.json
-    - original/
-    - 100x100/
-    - 250x500/
-  - italy/
-  - ...
-
-### info.json:
-  ```
-    {
-      existing_images: [
-        {
-          x: 100,
-          y: 100,
-          key: "sports/100x100"
-        }
-      ]
-    }
-  ```
+  - render index if `/*` path is used
+  - add a job that will backup log files w/ scp
+  - create a S3 upload script
+    - maybe just make a full S3 repository?
+  - throw all this in a Docker container (w/ hopes to orchestrate multiple sites in future)
+  - auto style for PHONE landscape
+  - build automation

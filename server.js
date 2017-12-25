@@ -6,11 +6,13 @@ const log = require('simple-node-logger').createSimpleLogger('info.log');
 var fs = require('fs');
 var https = require('https');
 
+var key = process.env.KEY;
+var cert = process.env.CERT;
+console.log("KEY: ", key);
+console.log("CERT: ", cert);
 var options = {
-  key: fs.readFileSync( 'encrypt/quinnfostersreflection.com.key' ),
-  cert: fs.readFileSync( 'encrypt/quinnfostersreflection.com.cert' ),
-  requestCert: false,
-  rejectUnauthorized: false
+  key: fs.readFileSync(key),
+  cert: fs.readFileSync(cert)
 };
 
 const app = express();

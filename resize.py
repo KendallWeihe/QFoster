@@ -53,5 +53,5 @@ def recursive_file_search(path, contain_px):
 root_path = sys.argv[1]
 
 for contain_px in range(100, 2500, 50):
-    print("Resizing to be contained withing {} px...".format(contain_px))
+    print("Resizing to be contained within {} px...".format(contain_px))
     recursive_file_search(root_path, contain_px)
