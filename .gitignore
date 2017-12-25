@@ -7,3 +7,4 @@ images/
 encrypt/
 logs/
 build/
+*.log
