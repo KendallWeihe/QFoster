@@ -1,0 +1,3 @@
+[submodule "WrapS3"]
+	path = WrapS3
+	url = git@github.com:KendallWeihe/WrapS3.git
