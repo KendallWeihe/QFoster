@@ -8,3 +8,5 @@ encrypt/
 logs/
 build/
 *.log
+public/img/portfolio/
+*.zip

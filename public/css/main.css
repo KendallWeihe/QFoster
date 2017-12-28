@@ -76,7 +76,7 @@ a:active {
 }
 
 .slick-dots {
-  transform: translateY(1.5vh);
+  transform: translateY(1vh);
 }
 
 /*.slick-dots > li {

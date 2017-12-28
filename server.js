@@ -1,6 +1,6 @@
 const express = require('express');
 const util = require('util');
-const AWS = require('aws-sdk');
+// const AWS = require('aws-sdk');
 const log = require('simple-node-logger').createSimpleLogger('info.log');
 
 var fs = require('fs');
@@ -17,13 +17,13 @@ var options = {
 
 const app = express();
 
-const access_key = process.env.AWS_ACCESS_KEY_ID;
-const secret_key = process.env.AWS_SECRET_ACCESS_KEY;
-
-AWS.config = new AWS.Config();
-AWS.config.accessKeyId = access_key;
-AWS.config.secretAccessKey = secret_key;
-AWS.config.region = "us-east-1";
+// const access_key = process.env.AWS_ACCESS_KEY_ID;
+// const secret_key = process.env.AWS_SECRET_ACCESS_KEY;
+//
+// AWS.config = new AWS.Config();
+// AWS.config.accessKeyId = access_key;
+// AWS.config.secretAccessKey = secret_key;
+// AWS.config.region = "us-east-1";
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
   console.log(req.headers);
   log.info(req.headers);
 
-  if (req.get('X-Forwarded-Proto') !== 'https') {
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
@@ -49,17 +49,34 @@ app.get('/', function (req, res) {
   }
 })
 
-app.get("/sports", function(req, res) {
+app.get("/reflections", function(req, res) {
   console.log(req.headers);
   log.info(req.headers);
 
-  if (req.get('X-Forwarded-Proto') !== 'https') {
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
-    images("sports", req.query.contain_px, function(ret_string) {
+    public_images("reflections", req.query.contain_px, function(ret_string) {
+      res.write(ret_string);
+      res.end();
+    });
+  }
+})
+
+app.get("/sports", function(req, res) {
+  console.log(req.headers);
+  log.info(req.headers);
+
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
+    console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else {
+    public_images("sports", req.query.contain_px, function(ret_string) {
       res.write(ret_string);
       res.end();
     });
@@ -70,30 +87,13 @@ app.get("/portraits", function(req, res) {
   console.log(req.headers);
   log.info(req.headers);
 
-  if (req.get('X-Forwarded-Proto') !== 'https') {
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
     log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
-    images("portraits", req.query.contain_px, function(ret_string) {
-      res.write(ret_string);
-      res.end();
-    });
-  }
-})
-
-app.get("/reflections", function(req, res) {
-  console.log(req.headers);
-  log.info(req.headers);
-
-  if (req.get('X-Forwarded-Proto') !== 'https') {
-    console.log("Insecure, redirecting...");
-    log.info("Insecure, redirecting...");
-    res.redirect('https://' + req.get('Host') + req.url);
-  }
-  else {
-    images("reflections", req.query.contain_px, function(ret_string) {
+    public_images("portraits", req.query.contain_px, function(ret_string) {
       res.write(ret_string);
       res.end();
     });
@@ -104,12 +104,13 @@ app.get("/italy", function(req, res) {
   console.log(req.headers);
   log.info(req.headers);
 
-  if (req.get('X-Forwarded-Proto') !== 'https') {
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
-    images("italy", req.query.contain_px, function(ret_string) {
+    public_images("italy", req.query.contain_px, function(ret_string) {
       res.write(ret_string);
       res.end();
     });
@@ -121,7 +122,22 @@ app.get("/health", function(req, res) {
   res.end();
 })
 
-var images = function(album, contain_px_param, callback) {
+var public_images = function(album, contain_px, callback) {
+  var ret_string = "";
+  let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
+
+  console.log(util.format("Listing directory items for %s...", path))
+  fs.readdir(path, function(err, items) {
+      for (var i=0; i<items.length; i++) {
+          // ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
+          ret_string += util.format("https://localhost/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
+      }
+      callback(ret_string)
+  });
+}
+
+// NOTE: depracated
+var s3_images = function(album, contain_px_param, callback) {
   var ret_string = "";
   let contain_px = parseInt(contain_px_param, 10);
 

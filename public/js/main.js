@@ -56,7 +56,8 @@ function load_main_img(current_album) {
     contain_px = (Math.round(height / 100) * 100) + 50;
   }
 
-  var host = "https://quinnfostersreflection.com/" + current_album;
+  // var host = "https://quinnfostersreflection.com/" + current_album;
+  var host = "https://localhost/" + current_album;
   var parameters = {album: current_album, contain_px: contain_px};
 
   console.log("Main parameters: ", parameters);
@@ -108,7 +109,37 @@ function load_main_img(current_album) {
   });
 };
 
+function stylize(){
+  var width = document.body.clientWidth;
+  var height = document.body.clientHeight;
 
+  var container_x = width * 0.05;
+  var container_y = height * 0.05;
+  document.getElementsByClassName("container")[0].style.transform = "translate(" + container_x.toString() + "px, " + container_y.toString() + "px)";
+
+  width = width * 0.90;
+  height = height * 0.90;
+
+  // TODO:
+  //   - get number of pixels in between top of container and top of main image
+  //   - get height of <a>
+  //   - position
+      // - 1px = (100vw / 500px) = 0.2vw
+
+  var nav_x = width * 0.10;
+  var nav_y = height * 0.03;
+  document.getElementsByClassName("nav")[0].style.transform = "translate(" + nav_x.toString() + "px, " + nav_y.toString() + "px)";
+
+  var main_x = width * 0.10;
+  var main_y = nav_y + (height * 0.095);
+  document.getElementsByClassName("main")[0].style.transform = "translate(" + main_x.toString() + "px, " + main_y.toString() + "px)";
+
+  // var preview_x = width * 0.10;
+  // var preview_y = main_y + (height * 0.60);
+  // document.getElementsByClassName("preview")[0].style.transform = "translate(" + preview_x.toString() + "px, " + preview_y.toString() + "px)";
+};
+
+// NOTE: not in use
 function load_thumbnails() {
   var height = document.getElementsByClassName("preview-slide")[0].clientHeight;
   var contain_px = (Math.round(height / 10) * 10) + 10;
@@ -143,34 +174,4 @@ function load_thumbnails() {
       infinite: true
     });
   });
-};
-
-function stylize(){
-  var width = document.body.clientWidth;
-  var height = document.body.clientHeight;
-
-  var container_x = width * 0.05;
-  var container_y = height * 0.05;
-  document.getElementsByClassName("container")[0].style.transform = "translate(" + container_x.toString() + "px, " + container_y.toString() + "px)";
-
-  width = width * 0.90;
-  height = height * 0.90;
-
-  // TODO:
-  //   - get number of pixels in between top of container and top of main image
-  //   - get height of <a>
-  //   - position
-      // - 1px = (100vw / 500px) = 0.2vw
-
-  var nav_x = width * 0.10;
-  var nav_y = height * 0.03;
-  document.getElementsByClassName("nav")[0].style.transform = "translate(" + nav_x.toString() + "px, " + nav_y.toString() + "px)";
-
-  var main_x = width * 0.10;
-  var main_y = nav_y + (height * 0.075);
-  document.getElementsByClassName("main")[0].style.transform = "translate(" + main_x.toString() + "px, " + main_y.toString() + "px)";
-
-  // var preview_x = width * 0.10;
-  // var preview_y = main_y + (height * 0.60);
-  // document.getElementsByClassName("preview")[0].style.transform = "translate(" + preview_x.toString() + "px, " + preview_y.toString() + "px)";
 };
