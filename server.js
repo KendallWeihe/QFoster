@@ -129,8 +129,8 @@ var public_images = function(album, contain_px, callback) {
   console.log(util.format("Listing directory items for %s...", path))
   fs.readdir(path, function(err, items) {
       for (var i=0; i<items.length; i++) {
-          // ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
-          ret_string += util.format("https://localhost/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
+          ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
+          // ret_string += util.format("https://localhost/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
       }
       callback(ret_string)
   });
