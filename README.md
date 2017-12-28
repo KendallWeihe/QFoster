@@ -28,10 +28,7 @@
 
 # TODO:
   - render index if `/*` path is used
-  - switch to EBS rather than S3 (?) (caching issue)
   - add a job that will backup log files w/ scp
-  - create a S3 upload script
-    - maybe just make a full S3 repository?
   - throw all this in a Docker container (w/ hopes to orchestrate multiple sites in future)
   - auto style for PHONE landscape
   - build automation
