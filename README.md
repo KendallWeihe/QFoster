@@ -27,8 +27,31 @@
   - `sudo KEY=<path>/<name>.key CERT=<path>/<name>.cert node server.js`
 
 # TODO:
+  - setup QF portal for uploading images & captions
+  - About Me page
   - render index if `/*` path is used
   - add a job that will backup log files w/ scp
   - throw all this in a Docker container (w/ hopes to orchestrate multiple sites in future)
   - auto style for PHONE landscape
   - build automation
+
+# QF EDIT portal
+  - json meta file in root
+    - file name
+    - caption
+    - index
+  - `$.get`
+    - should return in order
+  - `$.get` to also get captions (also in order)
+  - page for QF to make edits
+    - show all images (thumbnail style)
+    - display index & caption
+    - allow edit of either ^
+    - `save` button PUT to server
+
+  - `/edit/{album}`
+    - read from meta.json
+    - inspiration from public_images()
+    - return meta info as well for each 
+    - ...
+    - change path to something obscure

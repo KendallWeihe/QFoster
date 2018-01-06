@@ -1,8 +1,8 @@
 const express = require('express');
 const util = require('util');
-// const AWS = require('aws-sdk');
 const log = require('simple-node-logger').createSimpleLogger('info.log');
 
+var jsonfile = require('jsonfile')
 var fs = require('fs');
 var https = require('https');
 
@@ -16,14 +16,6 @@ var options = {
 };
 
 const app = express();
-
-// const access_key = process.env.AWS_ACCESS_KEY_ID;
-// const secret_key = process.env.AWS_SECRET_ACCESS_KEY;
-//
-// AWS.config = new AWS.Config();
-// AWS.config.accessKeyId = access_key;
-// AWS.config.secretAccessKey = secret_key;
-// AWS.config.region = "us-east-1";
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
@@ -122,6 +114,37 @@ app.get("/health", function(req, res) {
   res.end();
 })
 
+app.get("/edit", function(req, res) {
+  console.log(req.headers);
+  log.info(req.headers);
+
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
+    console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else {
+    res.render("edit");
+  }
+})
+
+app.get("/edit/images", function(req, res) {
+  console.log(req.headers);
+  log.info(req.headers);
+
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
+    console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else {
+    edit_images(req.query.contain_px, function(ret_string) {
+      res.write(ret_string);
+      res.end();
+    });
+  }
+})
+
 var public_images = function(album, contain_px, callback) {
   var ret_string = "";
   let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
@@ -134,6 +157,43 @@ var public_images = function(album, contain_px, callback) {
       }
       callback(ret_string)
   });
+}
+
+var edit_images = function(contain_px, callback) {
+  var ret_string = "";
+  var file = './meta.json'
+  jsonfile.readFile(file, function(err, meta) {
+    // console.dir(meta)
+
+    for (album in meta) {
+      console.log(album);
+      let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
+
+      console.log(util.format("Listing directory items for %s...", path))
+      fs.readdir(path, function(err, items) {
+        for (var i=0; i<items.length; i++) {
+          var photo_name = items[i];
+          ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
+          // ret_string += util.format("https://localhost/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
+          // console.log(meta[album]);
+
+          for (var j=0; j<meta[album].length; j++) {
+            if (meta[album][j].photo_name == photo_name) {
+              // console.log("found");
+              ret_string += util.format("%s,", meta[album][j].caption);
+              ret_string += util.format("%s|", meta[album][j].index);
+            }
+          }
+        }
+
+        ret_string += util.format(";")
+        console.log(ret_string);
+      });
+    }
+
+    callback(ret_string);
+
+  })
 }
 
 // NOTE: depracated
