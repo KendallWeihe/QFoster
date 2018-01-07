@@ -170,24 +170,20 @@ var edit_images = function(contain_px, callback) {
       let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
 
       console.log(util.format("Listing directory items for %s...", path))
-      fs.readdir(path, function(err, items) {
-        for (var i=0; i<items.length; i++) {
-          var photo_name = items[i];
-          ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
-          // ret_string += util.format("https://localhost/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
-          // console.log(meta[album]);
+      fs.readdirSync(path).forEach(function(item) {
+        var photo_name = item;
+        // console.log(photo_name);
+        ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
 
-          for (var j=0; j<meta[album].length; j++) {
-            if (meta[album][j].photo_name == photo_name) {
-              // console.log("found");
-              ret_string += util.format("%s,", meta[album][j].caption);
-              ret_string += util.format("%s|", meta[album][j].index);
-            }
+        for (var j=0; j<meta[album].length; j++) {
+          if (meta[album][j].photo_name == photo_name) {
+            ret_string += util.format("%s,", meta[album][j].caption);
+            ret_string += util.format("%s|", meta[album][j].index);
           }
         }
 
         ret_string += util.format(";")
-        console.log(ret_string);
+        // console.log(ret_string);
       });
     }
 
