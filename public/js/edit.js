@@ -37,11 +37,10 @@ function get_edit_images(current_album) {
   var page = path.split("/").pop();
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  // var contain_px = (Math.round(width / 100) * 100) + 50;
-  var contain_px = 1700;
+  var contain_px = (Math.round(width / 100) * 100) + 50;
 
-  var host = "https://quinnfostersreflection/edit/images";
-  // var host = "https://localhost/edit/images";
+  // var host = "https://quinnfostersreflection/edit/images";
+  var host = "https://localhost/edit/images";
   var parameters = {album: current_album, contain_px: contain_px};
 
   console.log("Thumbnail parameters: ", parameters);
@@ -49,8 +48,8 @@ function get_edit_images(current_album) {
     console.log(data);
 
     var main = document.getElementsByClassName("main")[0];
-
     var albums = data.split(";");
+
     var num_photos = 0;
     for (var i=0; i<albums.length - 1; i++) {
       var photos = albums[i].split("|");
@@ -61,6 +60,7 @@ function get_edit_images(current_album) {
         var caption = photos[j].split(",")[1];
         var index = photos[j].split(",")[2];
         var album = photo_link.split("/")[photo_link.split("/").length - 2];
+        var file_name = photo_link.split("/")[photo_link.split("/").length - 1];
         // console.log(photo_link);
         // console.log(caption);
         // console.log(index);
@@ -69,29 +69,41 @@ function get_edit_images(current_album) {
         if (photo_link != "") {
           // console.log(photos[j]);
 
+          var object = document.createElement("div");
+
           var img = document.createElement("img");
           img.src = photo_link;
 
-          // var album_tag = document.createElement("p");
-          // album_tag.innerText = album;
-          //
-          // var caption_tag = document.createElement("p");
-          // caption_tag.innerText = caption;
-          //
-          // var index_tag = document.createElement("p");
-          // index_tag.innerText = index
-          //
-          // var p_div = document.createElement("div");
-          // p_div.appendChild(img);
-          // p_div.appendChild(album_tag);
-          // p_div.appendChild(caption_tag);
-          // p_div.appendChild(index_tag);
-          // main.appendChild(p_div);
+          var index_form = document.createElement("form");
+          index_form.action = "/update_index";
+          index_form.method = "POST";
+          var current_index = document.createElement("label");
+          current_index.for = "index_input"
+          current_index.innerText = "Current index: ";
+          var index_input = document.createElement("input");
+          index_input.id = "index_input"
+          index_input.type = "text";
+          index_input.value = index;
+          var save_btn = document.createElement("input");
+          save_btn.type = "submit";
+          save_btn.value = "Update";
+          index_form.appendChild(current_index);
+          index_form.appendChild(index_input);
+          index_form.appendChild(save_btn);
 
-          // TODO:
-          //   - delete button
-          //   - index form
-          //   - upload button
+          var delete_photo_form = document.createElement("form");
+          delete_photo_form.action = "/delete_photo"
+          delete_photo_form.method = "POST"
+          var delete_photo_btn = document.createElement("input");
+          delete_photo_btn.type = "submit"
+          delete_photo_btn.value = "Delete";
+          delete_photo_form.appendChild(delete_photo_btn)
+
+          object.appendChild(img);
+          object.appendChild(index_form);
+          object.appendChild(delete_photo_form);
+          main.appendChild(object);
+
         }
       }
     }
