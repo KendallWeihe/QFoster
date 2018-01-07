@@ -29,6 +29,7 @@
 # TODO:
   - setup QF portal for uploading images & captions
   - About Me page
+  - "Get full size image" button
   - render index if `/*` path is used
   - add a job that will backup log files w/ scp
   - throw all this in a Docker container (w/ hopes to orchestrate multiple sites in future)
@@ -40,18 +41,38 @@
     - file name
     - caption
     - index
-  - `$.get`
-    - should return in order
-  - `$.get` to also get captions (also in order)
-  - page for QF to make edits
-    - show all images (thumbnail style)
-    - display index & caption
-    - allow edit of either ^
-    - `save` button PUT to server
+  - Python photos program
+    - CRUD for photos
+  - UX
+    - nav bar for album
+    - for each photo:
+      - delete button
+      - index form
+      - caption form
+      - save button
+    - upload new photo button
+    - delete all photos button
 
-  - `/edit/{album}`
-    - read from meta.json
-    - inspiration from public_images()
-    - return meta info as well for each 
-    - ...
-    - change path to something obscure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...

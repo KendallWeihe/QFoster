@@ -138,7 +138,7 @@ app.get("/edit/images", function(req, res) {
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
-    edit_images(req.query.contain_px, function(ret_string) {
+    edit_images(req.query.album, req.query.contain_px, function(ret_string) {
       res.write(ret_string);
       res.end();
     });
@@ -159,33 +159,31 @@ var public_images = function(album, contain_px, callback) {
   });
 }
 
-var edit_images = function(contain_px, callback) {
+var edit_images = function(album, contain_px, callback) {
   var ret_string = "";
   var file = './meta.json'
   jsonfile.readFile(file, function(err, meta) {
     // console.dir(meta)
 
-    for (album in meta) {
-      console.log(album);
-      let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
+    console.log(album);
+    let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
 
-      console.log(util.format("Listing directory items for %s...", path))
-      fs.readdirSync(path).forEach(function(item) {
-        var photo_name = item;
-        // console.log(photo_name);
-        ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
+    console.log(util.format("Listing directory items for %s...", path))
+    fs.readdirSync(path).forEach(function(item) {
+      var photo_name = item;
+      // console.log(photo_name);
+      ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
 
-        for (var j=0; j<meta[album].length; j++) {
-          if (meta[album][j].photo_name == photo_name) {
-            ret_string += util.format("%s,", meta[album][j].caption);
-            ret_string += util.format("%s|", meta[album][j].index);
-          }
+      for (var j=0; j<meta[album].length; j++) {
+        if (meta[album][j].photo_name == photo_name) {
+          ret_string += util.format("%s,", meta[album][j].caption);
+          ret_string += util.format("%s|", meta[album][j].index);
         }
+      }
 
-        ret_string += util.format(";")
-        // console.log(ret_string);
-      });
-    }
+      ret_string += util.format(";")
+      // console.log(ret_string);
+    });
 
     callback(ret_string);
 

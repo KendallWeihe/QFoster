@@ -10,3 +10,5 @@ build/
 *.log
 public/img/portfolio/
 *.zip
+*.jpg
+*.JPG
