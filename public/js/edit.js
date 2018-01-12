@@ -37,7 +37,8 @@ function get_edit_images(current_album) {
   var page = path.split("/").pop();
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  var contain_px = (Math.round(width / 100) * 100) + 50;
+  // var contain_px = (Math.round(width / 100) * 100) + 50;
+  var contain_px = 450;
 
   // var host = "https://quinnfostersreflection/edit/images";
   var host = "https://localhost/edit/images";
@@ -73,15 +74,20 @@ function get_edit_images(current_album) {
 
           var img = document.createElement("img");
           img.src = photo_link;
+          img.style.height = "80%";
+          img.style.width = "100%";
+          img.style.objectFit = "contain";
 
           var index_form = document.createElement("form");
           index_form.action = "/update_index";
           index_form.method = "POST";
+
           var current_index = document.createElement("label");
-          current_index.for = "index_input"
+          current_index.for = "index_input";
           current_index.innerText = "Current index: ";
           var index_input = document.createElement("input");
-          index_input.id = "index_input"
+          index_input.id = "index_input";
+          index_input.name = "index_input";
           index_input.type = "text";
           index_input.value = index;
           var save_btn = document.createElement("input");
@@ -94,16 +100,26 @@ function get_edit_images(current_album) {
           var delete_photo_form = document.createElement("form");
           delete_photo_form.action = "/delete_photo"
           delete_photo_form.method = "POST"
-          var delete_photo_btn = document.createElement("input");
-          delete_photo_btn.type = "submit"
-          delete_photo_btn.value = "Delete";
-          delete_photo_form.appendChild(delete_photo_btn)
+          var delete_photo_info = document.createElement("input");
+          delete_photo_info.type = "hidden";
+          delete_photo_info.name = "delete";
+          delete_photo_info.value = album + "|" + index;
+          var delete_photo_btn = document.createElement("button");
+          delete_photo_btn.type = "submit";
+          delete_photo_btn.innerText = "Delete";
+          delete_photo_form.appendChild(delete_photo_info);
+          delete_photo_form.appendChild(delete_photo_btn);
 
           object.appendChild(img);
           object.appendChild(index_form);
           object.appendChild(delete_photo_form);
           main.appendChild(object);
 
+          // TODO: 
+          //   - use buttons
+          //   - onclick -- call function
+          //   - function will receive string like this function
+          //   - extract this function to update page live
         }
       }
     }

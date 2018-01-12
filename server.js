@@ -145,6 +145,34 @@ app.get("/edit/images", function(req, res) {
   }
 })
 
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
+
+// for parsing application/json
+// app.use(bodyParser.json());
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true }));
+//form-urlencoded
+
+// app.use(upload.array());
+
+app.post("/update_index", function(req, res) {
+  console.log(req.body);
+  // console.log(req.body.index_input);
+})
+
+app.post("/delete_photo", function(req, res) {
+  console.log(req.body);
+
+  // TODO:
+  //   - remove item from meta.json
+  //     - update all trailing indices
+  //   - remove photo from public dir
+  //   - respond with new edit_images() response
+})
+
 var public_images = function(album, contain_px, callback) {
   var ret_string = "";
   let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
