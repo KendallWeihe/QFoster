@@ -139,7 +139,7 @@ function fill_grid(photo) {
     delete_button.type = "submit";
     delete_button.id = file_name;
     delete_button.album = album;
-    delete_button.photo = photo;
+    delete_button.photo = file_name;
     delete_button.innerText = "Delete";
 
     div.appendChild(img);
@@ -220,6 +220,11 @@ function handle_delete(button) {
   $.get(host, parameters, function(data) {
     console.log(data);
 
+    var myNode = document.getElementsByClassName("main")[0];
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    
     var albums = data.split(";");
     var num_photos = 0;
     for (var i=0; i<albums.length - 1; i++) {

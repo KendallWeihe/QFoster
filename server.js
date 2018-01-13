@@ -201,26 +201,34 @@ app.get("/delete", function(req, res) {
     var photo = req.query.photo;
     var contain_px = req.query.contain_px;
 
-    // TODO:
-    //   - iterate through directory and rm file
-    //   - iterate through meta.json and remove
-
-    
+    for (var i=100; i<2500; i += 50) {
+      var path = util.format("public/img/portfolio/resized/%d/%s/%s", i, album, photo);
+      // console.log(path)
+      fs.unlink(path, function(err) {});
+    }
 
     var file = './meta.json'
     jsonfile.readFile(file, function(err, meta) {
       // console.dir(meta)
 
+      var new_meta = {}
+      new_meta[album] = [];
+
+      for (var other_album in meta) {
+        if (other_album != album) {
+          new_meta[other_album] = meta[other_album];
+        }
+      }
+
       for (var i=0; i<meta[album].length; i++) {
         var photo_name = meta[album][i].photo_name;
-        if (photo_name == photo) {
-          meta[album][i].caption = caption;
-          meta[album][i].index = index;
+        if (photo_name != photo) {
+          new_meta[album].push(meta[album][i]);
         }
       }
 
       console.log("writing back to meta.json...");
-      jsonfile.writeFile(file, meta, {spaces: 2, EOL: '\r\n'}, function(err) {
+      jsonfile.writeFile(file, new_meta, {spaces: 2, EOL: '\r\n'}, function(err) {
         edit_images(album, contain_px, function(ret_string) {
           // console.log(ret_string);
           res.write(ret_string);
@@ -228,6 +236,7 @@ app.get("/delete", function(req, res) {
         });
       })
     })
+
   }
 })
 
