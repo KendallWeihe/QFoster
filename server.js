@@ -145,46 +145,112 @@ app.get("/edit/images", function(req, res) {
   }
 })
 
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var upload = multer();
+app.get("/update", function(req, res) {
+  console.log(req.headers);
+  log.info(req.headers);
 
-// for parsing application/json
-// app.use(bodyParser.json());
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
+    console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else {
+    console.log(req.query);
+    var album = req.query.album;
+    var photo = req.query.photo;
+    var caption = req.query.caption;
+    var index = req.query.index;
+    var contain_px = req.query.contain_px;
 
-// for parsing application/xwww-
-app.use(bodyParser.urlencoded({ extended: true }));
-//form-urlencoded
+    var file = './meta.json'
+    jsonfile.readFile(file, function(err, meta) {
+      // console.dir(meta)
 
-// app.use(upload.array());
+      for (var i=0; i<meta[album].length; i++) {
+        var photo_name = meta[album][i].photo_name;
+        if (photo_name == photo) {
+          meta[album][i].caption = caption;
+          meta[album][i].index = index;
+        }
+      }
 
-app.post("/update_index", function(req, res) {
-  console.log(req.body);
-  // console.log(req.body.index_input);
+      console.log("writing back to meta.json...");
+      jsonfile.writeFile(file, meta, {spaces: 2, EOL: '\r\n'}, function(err) {
+        edit_images(album, contain_px, function(ret_string) {
+          // console.log(ret_string);
+          res.write(ret_string);
+          res.end();
+        });
+      })
+    })
+  }
 })
 
-app.post("/delete_photo", function(req, res) {
-  console.log(req.body);
+app.get("/delete", function(req, res) {
+  console.log(req.headers);
+  log.info(req.headers);
 
-  // TODO:
-  //   - remove item from meta.json
-  //     - update all trailing indices
-  //   - remove photo from public dir
-  //   - respond with new edit_images() response
+  if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
+    console.log("Insecure, redirecting...");
+    log.info("Insecure, redirecting...");
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else {
+    console.log(req.query);
+    var album = req.query.album;
+    var photo = req.query.photo;
+    var contain_px = req.query.contain_px;
+
+    // TODO:
+    //   - iterate through directory and rm file
+    //   - iterate through meta.json and remove
+
+    
+
+    var file = './meta.json'
+    jsonfile.readFile(file, function(err, meta) {
+      // console.dir(meta)
+
+      for (var i=0; i<meta[album].length; i++) {
+        var photo_name = meta[album][i].photo_name;
+        if (photo_name == photo) {
+          meta[album][i].caption = caption;
+          meta[album][i].index = index;
+        }
+      }
+
+      console.log("writing back to meta.json...");
+      jsonfile.writeFile(file, meta, {spaces: 2, EOL: '\r\n'}, function(err) {
+        edit_images(album, contain_px, function(ret_string) {
+          // console.log(ret_string);
+          res.write(ret_string);
+          res.end();
+        });
+      })
+    })
+  }
 })
 
 var public_images = function(album, contain_px, callback) {
   var ret_string = "";
-  let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
 
-  console.log(util.format("Listing directory items for %s...", path))
-  fs.readdir(path, function(err, items) {
-      for (var i=0; i<items.length; i++) {
-          ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
-          // ret_string += util.format("https://localhost/img/portfolio/resized/%s/%s/%s|", contain_px, album, items[i])
+  var file = './meta.json'
+  jsonfile.readFile(file, function(err, meta) {
+    // console.dir(meta)
+
+    for (var i=0; i<meta[album].length; i++) {
+      for (var j=0; j<meta[album].length; j++) {
+        var index = meta[album][j].index;
+        if (i == index) {
+          var photo_name = meta[album][j].photo_name;
+          var caption = meta[album][j].caption;
+          ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s|", contain_px, album, photo_name);
+        }
       }
-      callback(ret_string)
-  });
+    }
+
+    callback(ret_string);
+  })
 }
 
 var edit_images = function(album, contain_px, callback) {
@@ -193,25 +259,19 @@ var edit_images = function(album, contain_px, callback) {
   jsonfile.readFile(file, function(err, meta) {
     // console.dir(meta)
 
-    console.log(album);
-    let path = util.format("public/img/portfolio/resized/%s/%s/", contain_px, album)
-
-    console.log(util.format("Listing directory items for %s...", path))
-    fs.readdirSync(path).forEach(function(item) {
-      var photo_name = item;
-      // console.log(photo_name);
-      ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
-
+    for (var i=0; i<meta[album].length; i++) {
       for (var j=0; j<meta[album].length; j++) {
-        if (meta[album][j].photo_name == photo_name) {
-          ret_string += util.format("%s,", meta[album][j].caption);
-          ret_string += util.format("%s|", meta[album][j].index);
+        var index = meta[album][j].index;
+        if (i == index) {
+          var photo_name = meta[album][j].photo_name;
+          var caption = meta[album][j].caption;
+          ret_string += util.format("https://quinnfostersreflection.com/img/portfolio/resized/%s/%s/%s,", contain_px, album, photo_name);
+          ret_string += util.format("%s,", caption);
+          ret_string += util.format("%s|", index);
+          ret_string += util.format(";")
         }
       }
-
-      ret_string += util.format(";")
-      // console.log(ret_string);
-    });
+    }
 
     callback(ret_string);
 

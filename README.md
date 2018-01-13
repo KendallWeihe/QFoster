@@ -55,7 +55,15 @@
 
 
 
-
+# Portal
+  - form changes
+    - submit can trigger js function
+    - js function
+      - performs method
+      - handles response
+    - server side
+      - handling the request
+      - respond with new page layout
 
 
 
