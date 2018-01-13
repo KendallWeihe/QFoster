@@ -183,6 +183,11 @@ function handle_form(form) {
   $.get(host, parameters, function(data) {
     console.log(data);
 
+    var myNode = document.getElementsByClassName("main")[0];
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
     var albums = data.split(";");
     var num_photos = 0;
     for (var i=0; i<albums.length - 1; i++) {
@@ -224,7 +229,7 @@ function handle_delete(button) {
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-    
+
     var albums = data.split(";");
     var num_photos = 0;
     for (var i=0; i<albums.length - 1; i++) {
