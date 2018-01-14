@@ -37,10 +37,10 @@ function get_edit_images(current_album) {
   var page = path.split("/").pop();
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  // var contain_px = (Math.round(width / 100) * 100) + 50;
-  var contain_px = 450;
+  var contain_px = (Math.round(width / 100) * 100) + 50;
+  // var contain_px = 450;
 
-  var host = "https://quinnfostersreflection/edit/images";
+  var host = "https://quinnfostersreflection.com/edit/images";
   // var host = "https://localhost/edit/images";
   var parameters = {album: current_album, contain_px: contain_px};
 
@@ -148,8 +148,8 @@ function delete_all() {
   var divs = container.getElementsByTagName("div");
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  // var contain_px = (Math.round(width / 100) * 100) + 50;
-  var contain_px = 450;
+  var contain_px = (Math.round(width / 100) * 100) + 50;
+  // var contain_px = 450;
 
   var parameters = {
     contain_px: contain_px,
@@ -168,7 +168,7 @@ function delete_all() {
     parameters.buttons.push(params);
   }
 
-  var host = "https://quinnfostersreflection/delete";
+  var host = "https://quinnfostersreflection.com/delete";
   // var host = "https://localhost/delete";
 
   console.log("Thumbnail parameters: ", parameters);
@@ -218,10 +218,10 @@ function handle_delete(button) {
   var photo = button.photo;
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  // var contain_px = (Math.round(width / 100) * 100) + 50;
-  var contain_px = 450;
+  var contain_px = (Math.round(width / 100) * 100) + 50;
+  // var contain_px = 450;
 
-  var host = "https://quinnfostersreflection/delete";
+  var host = "https://quinnfostersreflection.com/delete";
   // var host = "https://localhost/delete";
   var parameters = {
     contain_px: contain_px,
@@ -276,8 +276,8 @@ function handle_save() {
   var forms = document.getElementsByTagName("form");
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  // var contain_px = (Math.round(width / 100) * 100) + 50;
-  var contain_px = 450;
+  var contain_px = (Math.round(width / 100) * 100) + 50;
+  // var contain_px = 450;
 
   var parameters = {
     contain_px: contain_px,
@@ -301,7 +301,7 @@ function handle_save() {
     parameters.forms.push(params);
   }
 
-  var host = "https://quinnfostersreflection/update";
+  var host = "https://quinnfostersreflection.com/update";
   // var host = "https://localhost/update";
 
   console.log("Thumbnail parameters: ", parameters);
@@ -375,10 +375,10 @@ function handle_form(form) {
   var index = form.elements["index-in"].value;
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  // var contain_px = (Math.round(width / 100) * 100) + 50;
-  var contain_px = 450;
+  var contain_px = (Math.round(width / 100) * 100) + 50;
+  // var contain_px = 450;
 
-  var host = "https://quinnfostersreflection/update";
+  var host = "https://quinnfostersreflection.com/update";
   // var host = "https://localhost/update";
   var parameters = {
     album: album,
