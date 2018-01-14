@@ -27,6 +27,7 @@ def update_meta(path):
             tmp["caption"] = ""
             tmp["photo_name"] = files[i]
             meta[album].append(tmp)
+            print path
 
 def iterate_recursive(path):
     objects = os.listdir(path)

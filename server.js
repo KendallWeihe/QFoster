@@ -276,6 +276,7 @@ var public_images = function(album, contain_px, callback) {
       }
     }
 
+    console.log(ret_string);
     callback(ret_string);
   })
 }

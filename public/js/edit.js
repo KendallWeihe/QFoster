@@ -40,8 +40,8 @@ function get_edit_images(current_album) {
   // var contain_px = (Math.round(width / 100) * 100) + 50;
   var contain_px = 450;
 
-  // var host = "https://quinnfostersreflection/edit/images";
-  var host = "https://localhost/edit/images";
+  var host = "https://quinnfostersreflection/edit/images";
+  // var host = "https://localhost/edit/images";
   var parameters = {album: current_album, contain_px: contain_px};
 
   console.log("Thumbnail parameters: ", parameters);
@@ -168,8 +168,8 @@ function delete_all() {
     parameters.buttons.push(params);
   }
 
-  // var host = "https://quinnfostersreflection/delete";
-  var host = "https://localhost/delete";
+  var host = "https://quinnfostersreflection/delete";
+  // var host = "https://localhost/delete";
 
   console.log("Thumbnail parameters: ", parameters);
   $.get(host, parameters, function(data) {
@@ -221,8 +221,8 @@ function handle_delete(button) {
   // var contain_px = (Math.round(width / 100) * 100) + 50;
   var contain_px = 450;
 
-  // var host = "https://quinnfostersreflection/delete";
-  var host = "https://localhost/delete";
+  var host = "https://quinnfostersreflection/delete";
+  // var host = "https://localhost/delete";
   var parameters = {
     contain_px: contain_px,
     buttons: [
@@ -301,8 +301,8 @@ function handle_save() {
     parameters.forms.push(params);
   }
 
-  // var host = "https://quinnfostersreflection/update";
-  var host = "https://localhost/update";
+  var host = "https://quinnfostersreflection/update";
+  // var host = "https://localhost/update";
 
   console.log("Thumbnail parameters: ", parameters);
   $.get(host, parameters, function(data) {
@@ -378,8 +378,8 @@ function handle_form(form) {
   // var contain_px = (Math.round(width / 100) * 100) + 50;
   var contain_px = 450;
 
-  // var host = "https://quinnfostersreflection/update";
-  var host = "https://localhost/update";
+  var host = "https://quinnfostersreflection/update";
+  // var host = "https://localhost/update";
   var parameters = {
     album: album,
     photo: photo,
