@@ -12,3 +12,5 @@ public/img/portfolio/
 *.zip
 *.jpg
 *.JPG
+meta.json
+backup/

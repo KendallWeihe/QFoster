@@ -146,8 +146,8 @@ app.get("/edit/images", function(req, res) {
 })
 
 app.get("/update", function(req, res) {
-  console.log(req.headers);
-  log.info(req.headers);
+  // console.log(req.headers);
+  // log.info(req.headers);
 
   if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
@@ -155,22 +155,33 @@ app.get("/update", function(req, res) {
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else {
-    console.log(req.query);
-    var album = req.query.album;
-    var photo = req.query.photo;
-    var caption = req.query.caption;
-    var index = req.query.index;
+    // console.log(req.query);
+
     var contain_px = req.query.contain_px;
+    var forms = req.query.forms;
 
     var file = './meta.json'
+    console.log("About to read meta.json...");
     jsonfile.readFile(file, function(err, meta) {
-      // console.dir(meta)
+      console.log("meta.json read...");
+      console.dir(meta)
 
-      for (var i=0; i<meta[album].length; i++) {
-        var photo_name = meta[album][i].photo_name;
-        if (photo_name == photo) {
-          meta[album][i].caption = caption;
-          meta[album][i].index = index;
+      for (var i=0; i<forms.length; i++) {
+        var form = forms[i];
+        console.log(form);
+
+        var album = form.album;
+        var photo = form.photo;
+        var caption = form.caption;
+        var index = form.index;
+
+        for (var j=0; j<meta[album].length; j++) {
+          var photo_name = meta[album][j].photo_name;
+          if (photo_name == photo) {
+            meta[album][j].caption = caption;
+            meta[album][j].index = index;
+            console.log(caption);
+          }
         }
       }
 
@@ -188,7 +199,7 @@ app.get("/update", function(req, res) {
 
 app.get("/delete", function(req, res) {
   console.log(req.headers);
-  log.info(req.headers);
+  // log.info(req.headers);
 
   if (req.headers.host !== "localhost" && req.get('X-Forwarded-Proto') !== 'https') {
     console.log("Insecure, redirecting...");
@@ -197,14 +208,21 @@ app.get("/delete", function(req, res) {
   }
   else {
     console.log(req.query);
-    var album = req.query.album;
-    var photo = req.query.photo;
-    var contain_px = req.query.contain_px;
 
-    for (var i=100; i<2500; i += 50) {
-      var path = util.format("public/img/portfolio/resized/%d/%s/%s", i, album, photo);
-      // console.log(path)
-      fs.unlink(path, function(err) {});
+    var contain_px = req.query.contain_px;
+    var buttons = req.query.buttons;
+    var photos = [];
+
+    for (var i=0; i<buttons.length; i++) {
+      var album = buttons[i].album;
+      var photo = buttons[i].photo;
+      photos.push(photo);
+
+      for (var j=100; j<2500; j += 50) {
+        var path = util.format("public/img/portfolio/resized/%d/%s/%s", j, album, photo);
+        console.log(path)
+        fs.unlink(path, function(err) {});
+      }
     }
 
     var file = './meta.json'
@@ -222,7 +240,7 @@ app.get("/delete", function(req, res) {
 
       for (var i=0; i<meta[album].length; i++) {
         var photo_name = meta[album][i].photo_name;
-        if (photo_name != photo) {
+        if (!photos.includes(photo_name)) {
           new_meta[album].push(meta[album][i]);
         }
       }
