@@ -18,7 +18,7 @@ _nsre = re.compile('([0-9]+)')
 def natural_sort_key(s):
     return [int(text) if text.isdigit() else text.lower()
             for text in re.split(_nsre, s)]
-            
+
 def update_meta(path):
     global meta
 
@@ -26,8 +26,7 @@ def update_meta(path):
     meta[album] = []
 
     files = os.listdir(path)
-    if len(files) > 1:
-        pdb.set_trace()
+    files.sort(key=natural_sort_key)
     for i in range(len(files)):
         if files[i] not in [j["photo_name"] for j in meta[album]]:
             tmp = {}
