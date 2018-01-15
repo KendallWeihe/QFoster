@@ -14,3 +14,4 @@ public/img/portfolio/
 *.JPG
 meta.json
 backup/
+*.swp
