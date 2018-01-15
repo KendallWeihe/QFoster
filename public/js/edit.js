@@ -1,81 +1,35 @@
 
 document.getElementById("sports").addEventListener("click", function() {
-  var myNode = document.getElementsByClassName("main")[0];
-  while (myNode.firstChild) {
-      myNode.removeChild(myNode.firstChild);
-  }
-  get_edit_images("sports");
+  clear();
+  get_images("sports");
 }, false);
 
 document.getElementById("portraits").addEventListener("click", function() {
-  var myNode = document.getElementsByClassName("main")[0];
-  while (myNode.firstChild) {
-      myNode.removeChild(myNode.firstChild);
-  }
-  get_edit_images("portraits");
+  clear();
+  get_images("portraits");
 }, false);
 
 document.getElementById("reflections").addEventListener("click", function() {
-  var myNode = document.getElementsByClassName("main")[0];
-  while (myNode.firstChild) {
-      myNode.removeChild(myNode.firstChild);
-  }
-  get_edit_images("reflections");
+  clear();
+  get_images("reflections");
 }, false);
 
 document.getElementById("italy").addEventListener("click", function() {
-  var myNode = document.getElementsByClassName("main")[0];
-  while (myNode.firstChild) {
-      myNode.removeChild(myNode.firstChild);
-  }
-  get_edit_images("italy");
+  clear();
+  get_images("italy");
 }, false);
 
+// -----------------------------------
 
-function get_edit_images(current_album) {
-  var path = window.location.pathname;
-  var page = path.split("/").pop();
-
+function get_images(current_album) {
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
   var contain_px = (Math.round(width / 100) * 100) + 50;
-  // var contain_px = 450;
 
   var host = "https://quinnfostersreflection.com/edit/images";
   // var host = "https://localhost/edit/images";
   var parameters = {album: current_album, contain_px: contain_px};
 
-  console.log("Thumbnail parameters: ", parameters);
-  $.get(host, parameters, function(data) {
-    console.log(data);
-
-    var save_btn = document.createElement("button");
-    save_btn.type = "submit";
-    save_btn.innerText = "Save";
-    save_btn.album = current_album;
-    save_btn.addEventListener("click", function() { handle_save(); })
-
-    var delete_all_btn = document.createElement("button");
-    delete_all_btn.type = "submit";
-    delete_all_btn.innerText = "Delete All";
-    delete_all_btn.album = current_album;
-    delete_all_btn.addEventListener("click", function() { delete_all(); })
-
-    var main = document.getElementsByClassName("main")[0];
-    main.appendChild(save_btn);
-    main.appendChild(delete_all_btn);
-
-    var albums = data.split(";");
-    var num_photos = 0;
-    for (var i=0; i<albums.length - 1; i++) {
-      var photos = albums[i].split("|");
-      num_photos += photos.length - 1;
-
-      for (var j=0; j<photos.length; j++) {
-        fill_grid(photos[j]);
-      }
-    }
-    console.log("Number of photos: ", num_photos);
-  });
+  update_server(host, parameters, current_album);
 };
 
 function fill_grid(photo) {
@@ -84,14 +38,8 @@ function fill_grid(photo) {
   var index = photo.split(",")[2];
   var album = photo_link.split("/")[photo_link.split("/").length - 2];
   var file_name = photo_link.split("/")[photo_link.split("/").length - 1];
-  // console.log(photo_link);
-  // console.log(caption);
-  // console.log(index);
-  // console.log(album);
 
   if (photo_link != "") {
-    // console.log(photos[j]);
-
     var container = document.getElementsByClassName("main")[0];
 
     var div = document.createElement("div");
@@ -137,7 +85,7 @@ function fill_grid(photo) {
     div.appendChild(document.createElement("br"));
     div.appendChild(delete_button);
 
-    delete_button.addEventListener("click", function() { handle_delete(this); });
+    delete_button.addEventListener("click", function() { delete_one(this); });
 
     container.appendChild(div);
   }
@@ -149,7 +97,6 @@ function delete_all() {
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
   var contain_px = (Math.round(width / 100) * 100) + 50;
-  // var contain_px = 450;
 
   var parameters = {
     contain_px: contain_px,
@@ -160,7 +107,6 @@ function delete_all() {
     var button = divs[i].getElementsByTagName("button")[0];
     var album = button.album;
     var photo = button.photo;
-    // handle_delete(button);
     var params = {
       album: album,
       photo: photo
@@ -171,55 +117,15 @@ function delete_all() {
   var host = "https://quinnfostersreflection.com/delete";
   // var host = "https://localhost/delete";
 
-  console.log("Thumbnail parameters: ", parameters);
-  $.get(host, parameters, function(data) {
-    console.log(data);
-
-    var myNode = document.getElementsByClassName("main")[0];
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
-    }
-
-    var save_btn = document.createElement("button");
-    save_btn.type = "submit";
-    save_btn.innerText = "Save";
-    save_btn.album = album;
-    save_btn.addEventListener("click", function() { handle_save(); })
-
-    var delete_all_btn = document.createElement("button");
-    delete_all_btn.type = "submit";
-    delete_all_btn.innerText = "Delete All";
-    delete_all_btn.album = album;
-    delete_all_btn.addEventListener("click", function() { delete_all(); })
-
-    var main = document.getElementsByClassName("main")[0];
-    main.appendChild(save_btn);
-    main.appendChild(delete_all_btn);
-
-    var albums = data.split(";");
-    var num_photos = 0;
-    for (var i=0; i<albums.length - 1; i++) {
-      var photos = albums[i].split("|");
-      num_photos += photos.length - 1;
-
-      for (var j=0; j<photos.length; j++) {
-        fill_grid(photos[j]);
-      }
-    }
-    console.log("Number of photos: ", num_photos);
-  });
+  update_server(host, parameters, album);
 };
 
-function handle_delete(button) {
-  console.log(button.album);
-  console.log(button.photo);
-
+function delete_one(button) {
   var album = button.album;
   var photo = button.photo;
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
   var contain_px = (Math.round(width / 100) * 100) + 50;
-  // var contain_px = 450;
 
   var host = "https://quinnfostersreflection.com/delete";
   // var host = "https://localhost/delete";
@@ -233,51 +139,14 @@ function handle_delete(button) {
     ]
   }
 
-  console.log("Thumbnail parameters: ", parameters);
-  $.get(host, parameters, function(data) {
-    console.log(data);
-
-    var myNode = document.getElementsByClassName("main")[0];
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
-    }
-
-    var save_btn = document.createElement("button");
-    save_btn.type = "submit";
-    save_btn.innerText = "Save";
-    save_btn.album = album;
-    save_btn.addEventListener("click", function() { handle_save(); })
-
-    var delete_all_btn = document.createElement("button");
-    delete_all_btn.type = "submit";
-    delete_all_btn.innerText = "Delete All";
-    delete_all_btn.album = album;
-    delete_all_btn.addEventListener("click", function() { delete_all(); })
-
-    var main = document.getElementsByClassName("main")[0];
-    main.appendChild(save_btn);
-    main.appendChild(delete_all_btn);
-
-    var albums = data.split(";");
-    var num_photos = 0;
-    for (var i=0; i<albums.length - 1; i++) {
-      var photos = albums[i].split("|");
-      num_photos += photos.length - 1;
-
-      for (var j=0; j<photos.length; j++) {
-        fill_grid(photos[j]);
-      }
-    }
-    console.log("Number of photos: ", num_photos);
-  });
+  update_server(host, parameters, album);
 }
 
-function handle_save() {
+function save_all() {
   var forms = document.getElementsByTagName("form");
 
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
   var contain_px = (Math.round(width / 100) * 100) + 50;
-  // var contain_px = 450;
 
   var parameters = {
     contain_px: contain_px,
@@ -287,7 +156,7 @@ function handle_save() {
   for (var i=0; i<forms.length; i++) {
     var form = forms[i];
 
-    var album = form.album;
+    var album = form.album; // TODO: album should be identified universally -- more than just here
     var photo = form.photo;
     var caption = form.elements["caption-in"].value;
     var index = form.elements["index-in"].value;
@@ -304,20 +173,30 @@ function handle_save() {
   var host = "https://quinnfostersreflection.com/update";
   // var host = "https://localhost/update";
 
+  update_server(host, parameters, album);
+};
+
+// -----------------------------------
+
+function clear() {
+  var myNode = document.getElementsByClassName("main")[0];
+  while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+  }
+};
+
+function update_server(host, parameters, album) {
   console.log("Thumbnail parameters: ", parameters);
   $.get(host, parameters, function(data) {
     console.log(data);
 
-    var myNode = document.getElementsByClassName("main")[0];
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
-    }
+    clear();
 
     var save_btn = document.createElement("button");
     save_btn.type = "submit";
     save_btn.innerText = "Save";
     save_btn.album = album;
-    save_btn.addEventListener("click", function() { handle_save(); })
+    save_btn.addEventListener("click", function() { save_all(); })
 
     var delete_all_btn = document.createElement("button");
     delete_all_btn.type = "submit";
@@ -342,6 +221,8 @@ function handle_save() {
     console.log("Number of photos: ", num_photos);
   });
 };
+
+// -----------------------------------
 
 function stylize(){
   var width = document.body.clientWidth;
@@ -361,60 +242,4 @@ function stylize(){
 };
 
 
-// NOTE: depracated:
-
-function handle_form(form) {
-  // console.log(form.photo);
-  // console.log(form.album);
-  // console.log(form.elements["caption-in"].value);
-  // console.log(form.elements["index-in"].value);
-
-  var album = form.album;
-  var photo = form.photo;
-  var caption = form.elements["caption-in"].value;
-  var index = form.elements["index-in"].value;
-
-  var width = document.getElementsByClassName("main")[0].clientWidth / 4;
-  var contain_px = (Math.round(width / 100) * 100) + 50;
-  // var contain_px = 450;
-
-  var host = "https://quinnfostersreflection.com/update";
-  // var host = "https://localhost/update";
-  var parameters = {
-    album: album,
-    photo: photo,
-    caption: caption,
-    index: index,
-    contain_px: contain_px
-  }
-
-  console.log("Thumbnail parameters: ", parameters);
-  $.get(host, parameters, function(data) {
-    console.log(data);
-
-    var myNode = document.getElementsByClassName("main")[0];
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
-    }
-
-    var main = document.getElementsByClassName("main")[0];
-    var save_btn = document.createElement("button");
-    save_btn.type = "submit";
-    save_btn.innerText = "Save";
-    save_btn.album = album;
-    save_btn.addEventListener("click", function() { handle_save(this); })
-    main.appendChild(save_btn);
-
-    var albums = data.split(";");
-    var num_photos = 0;
-    for (var i=0; i<albums.length - 1; i++) {
-      var photos = albums[i].split("|");
-      num_photos += photos.length - 1;
-
-      for (var j=0; j<photos.length; j++) {
-        fill_grid(photos[j]);
-      }
-    }
-    console.log("Number of photos: ", num_photos);
-  });
-}
+// ...

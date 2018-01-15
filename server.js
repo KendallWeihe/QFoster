@@ -161,14 +161,9 @@ app.get("/update", function(req, res) {
     var forms = req.query.forms;
 
     var file = './meta.json'
-    console.log("About to read meta.json...");
     jsonfile.readFile(file, function(err, meta) {
-      console.log("meta.json read...");
-      console.dir(meta)
-
       for (var i=0; i<forms.length; i++) {
         var form = forms[i];
-        console.log(form);
 
         var album = form.album;
         var photo = form.photo;
@@ -180,7 +175,6 @@ app.get("/update", function(req, res) {
           if (photo_name == photo) {
             meta[album][j].caption = caption;
             meta[album][j].index = index;
-            console.log(caption);
           }
         }
       }
@@ -220,7 +214,6 @@ app.get("/delete", function(req, res) {
 
       for (var j=100; j<2500; j += 50) {
         var path = util.format("public/img/portfolio/resized/%d/%s/%s", j, album, photo);
-        console.log(path)
         fs.unlink(path, function(err) {});
       }
     }
