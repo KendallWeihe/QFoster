@@ -54,35 +54,12 @@
     - delete all photos button
 
 
-
-# Portal
-  - form changes
-    - submit can trigger js function
-    - js function
-      - performs method
-      - handles response
-    - server side
-      - handling the request
-      - respond with new page layout
-  - ...
-  - good progress
-  - still need to ...
-    - upload button
-    - verification
-    - style page
-    - add caption
-    - add my mark
-    - ...
-    - going to do this later or maybe tomorrow
-    - I want to show QF I'm actively working on this now
-  - TODO:
-    - verify meta.py generates accurate meta file
-    - ssh to server
-    - rename QF dir
-    - git pull into new dir
-    - cp img dir to new repo
-    - stop old repo
-    - test functionality in new
+# TODO:
+  - [ ] upload images feature:
+    - [ ] offer upload form 
+    - [ ] server code to handle
+      - [ ] save image locally
+      - [ ] resize image via python script
 
 
 
