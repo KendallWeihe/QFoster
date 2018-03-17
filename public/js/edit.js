@@ -25,8 +25,8 @@ function get_images(current_album) {
   var width = document.getElementsByClassName("main")[0].clientWidth / 4;
   var contain_px = (Math.round(width / 100) * 100) + 50;
 
-  var host = "https://quinnfostersreflection.com/edit/images";
-  // var host = "https://localhost/edit/images";
+  // var host = "https://quinnfostersreflection.com/edit/images";
+  var host = "https://localhost/edit/images";
   var parameters = {album: current_album, contain_px: contain_px};
 
   update_server(host, parameters, current_album);
