@@ -98,7 +98,8 @@ document.getElementById("new-photo-btn").addEventListener("change", function(eve
         uploadImage(file.name, contents);
     };
 
-    reader.readAsBinaryString(file);
+    // reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file);
 });
 
 function authenticate(){
