@@ -49,31 +49,25 @@ function load_main_img(current_album) {
     var album = albums[current_album];
     for (var i = 0; i < album.length; i++)
     {
-      // var tick = function(i) {
-      //   return function() {
-          console.log(endpoint);
-          var photo = album[i];
-          console.log(photo);
-          var src = endpoint + "/" + current_album + "/" + photo;
-          console.log(src);
-          
-          var div = document.createElement("div");
-          var img = document.createElement("img");
-          img.src = src;
-          img.style.height = "100%";
-          img.style.objectFit = "contain";
-          img.className = "main-slide-img"
-          div.appendChild(img);
-          div.className = "main-image";
-          div.style.height = "100%";
-          div.style.visibility = "hidden";
-          // HIDE VISIBILITY
-          main_slide.appendChild(div);
-      //   }
-      // };
-      // setTimeout(tick(i), 2000 * i);
-      // console.log("next");
-      // IF I = LENGTH-1: FUNCTION TO STYLIZE SLIDE AND UNHIDE VISIBILITY 
+      console.log(endpoint);
+      var photo = album[i];
+      console.log(photo);
+      var src = endpoint + "/" + current_album + "/" + photo;
+      console.log(src);
+      
+      var div = document.createElement("div");
+      var img = document.createElement("img");
+      img.src = src;
+      img.style.height = "100%";
+      img.style.objectFit = "contain";
+      img.className = "main-slide-img"
+      div.appendChild(img);
+      div.className = "main-image";
+      div.style.height = "100%";
+      div.style.visibility = "hidden";
+      // HIDE VISIBILITY
+      main_slide.appendChild(div);
+
       if (i == (album.length-1))
       {
         console.log("here");
