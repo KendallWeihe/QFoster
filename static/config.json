@@ -1,85 +1,304 @@
 {
     "albums": {
         "reflections": [
-            "reflections_QF_01.JPG",
-            "reflections_QF_02.JPG",
-            "reflections_QF_03.JPG",
-            "reflections_QF_04.JPG",
-            "reflections_QF_07A.JPG",
-            "reflections_QF_07.JPG",
-            "reflections_QF_08A.JPG",
-            "reflections_QF_08.JPG",
-            "reflections_QF_09.JPG",
-            "reflections_QF_10.JPG",
-            "reflections_QF_11.JPG",
-            "reflections_QF_12.JPG",
-            "reflections_QF_13.JPG",
-            "reflections_QF_14.JPG",
-            "reflections_QF_15.JPG"
+            {
+                "file": "reflections_QF_01.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_02.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_03.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_04.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_07A.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_07.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_08A.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_08.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_09.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_10.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_11.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_12.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_13.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_14.JPG",
+                "caption": "default - caption" 
+            },
+            {
+                "file": "reflections_QF_15.JPG",
+                "caption": "default - caption" 
+            }
         ],
         "italy": [
-            "Italy_InOrder_01_QF.JPG",
-            "Italy_InOrder_02_QF.JPG",
-            "Italy_InOrder_03_QF.JPG",
-            "Italy_InOrder_04_QF.JPG",
-            "Italy_InOrder_05_QF.JPG",
-            "Italy_InOrder_06_QF.JPG",
-            "Italy_InOrder_07_QF.JPG",
-            "Italy_InOrder_08_QF.JPG",
-            "Italy_InOrder_09_QF.JPG",
-            "Italy_InOrder_10_QF.JPG",
-            "Italy_InOrder_11_QF.JPG",
-            "Italy_InOrder_12_QF.JPG",
-            "Italy_InOrder_13_QF.JPG",
-            "Italy_InOrder_14_QF.JPG",
-            "Italy_InOrder_15_QF.JPG",
-            "Italy_InOrder_16_QF.JPG",
-            "Italy_InOrder_17_QF.JPG",
-            "Italy_InOrder_18_QF.JPG",
-            "Italy_InOrder_19_QF.JPG",
-            "Italy_InOrder_20_QF.JPG",
-            "Italy_InOrder_21_QF.JPG",
-            "Italy_InOrder_22_QF.JPG",
-            "Italy_InOrder_23_QF.JPG",
-            "Italy_InOrder_24_QF.JPG",
-            "Italy_InOrder_25_QF.JPG",
-            "Italy_InOrder_27_QF.JPG",
-            "Italy_InOrder_28_QF.JPG",
-            "Italy_InOrder_29_QF.JPG",
-            "Italy_InOrder_31_QF.JPG",
-            "Italy_InOrder_32_QF.JPG",
-            "Italy_InOrder_33_QF.JPG",
-            "Italy_InOrder_34_QF.JPG",
-            "Italy_InOrder_35_QF.JPG",
-            "Italy_InOrder_36_QF.JPG",
-            "Italy_InOrder_37_QF.JPG"
+            {
+                "file": "Italy_InOrder_01_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_02_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_03_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_04_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_05_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_06_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_07_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_08_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_09_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_10_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_11_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_12_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_13_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_14_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_15_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_16_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_17_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_18_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_19_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_20_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_21_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_22_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_23_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_24_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_25_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_27_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_28_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_29_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_31_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_32_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_33_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_34_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_35_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_36_QF.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Italy_InOrder_37_QF.JPG",
+                "caption": "default - caption"
+            }
         ],
         "sports": [
-            "Sports_QF_01.JPG",
-            "Sports_QF_02.JPG",
-            "Sports_QF_03.JPG",
-            "Sports_QF_04.JPG",
-            "Sports_QF_05.JPG",
-            "Sports_QF_06.JPG",
-            "Sports_QF_07.JPG",
-            "Sports_QF_08.JPG",
-            "Sports_QF_09.JPG",
-            "Sports_QF_10.JPG",
-            "Sports_QF_11.JPG",
-            "Sports_QF_12.JPG",
-            "Sports_QF_13.JPG",
-            "Sports_QF_14.JPG",
-            "Sports_QF_15.JPG",
-            "Sports_QF_16.JPG",
-            "Sports_QF_17.JPG"
+            {
+                "file": "Sports_QF_01.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_02.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_03.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_04.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_05.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_06.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_07.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_08.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_09.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_10.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_11.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_12.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_13.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_14.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_15.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_16.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Sports_QF_17.JPG",
+                "caption": "default - caption"
+            }
         ],
         "portraits": [
-            "Portraits_QF_01A.JPG",
-            "Portraits_QF_02A.JPG",
-            "Portraits_QF_03A.JPG",
-            "Portraits_QF_04.JPG",
-            "Portraits_QF_05.JPG",
-            "Portraits_QF_06.JPG"
+            {
+                "file": "Portraits_QF_01A.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Portraits_QF_02A.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Portraits_QF_03A.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Portraits_QF_04.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Portraits_QF_05.JPG",
+                "caption": "default - caption"
+            },
+            {
+                "file": "Portraits_QF_06.JPG",
+                "caption": "default - caption"
+            }
         ]
     }
 }
