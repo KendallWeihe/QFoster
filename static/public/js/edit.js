@@ -4,11 +4,11 @@ var config = null;
 var current_album = null;
 var secretKey = null;
 var accessKey = null;
+var s3 = null;
 
 window.addEventListener("load", function(){
     $.getJSON("https://s3.amazonaws.com/qfoster/config.json", function(data){
         // useful global variable
-        console.log(data);
         config = data;
 
         // load album buttons
@@ -22,15 +22,15 @@ window.addEventListener("load", function(){
             parent.appendChild(btn);
 
             btn.addEventListener("click", function(event){
-                load_album(event);
+                current_album = event.path[0].attributes["album"].value;    
+                load_album();
             })
         }
     });
 });
 
-// TODO: pick up here!
-document.getElementById("auth-file").addEventListener("change", function(e){
-    var file = e.target.files[0];
+document.getElementById("auth-file").addEventListener("change", function(event){
+    var file = event.target.files[0];
     if (!file) {
         return;
     }
@@ -43,6 +43,7 @@ document.getElementById("auth-file").addEventListener("change", function(e){
         lines = contents.split("\n");
         accessKey = lines[1].split(" ")[2];
         secretKey = lines[2].split(" ")[2];
+        authenticate();
     };
 
     reader.readAsText(file);
@@ -53,6 +54,11 @@ document.getElementById("new-album-btn").addEventListener("click", function(){
 });
 
 document.getElementById("save-btn").addEventListener("click", function(){
+    if (s3 == null){
+        console.error("Not authenticated!");
+        return;
+    }
+
     var ul = document.getElementById("items");
     var lis = ul.getElementsByTagName("li");
     var li = null;
@@ -72,8 +78,49 @@ document.getElementById("save-btn").addEventListener("click", function(){
     putConfig();
 });
 
-function load_album(event){
-    current_album = event.path[0].attributes["album"].value;    
+document.getElementById("new-photo-btn").addEventListener("change", function(event){
+    if (s3 == null){
+        console.error("Not authenticated!");
+        return;
+    }
+
+    var file = event.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    var reader = new FileReader();
+    var contents = null;
+    var lines = null;
+    reader.onload = function(e) {
+        contents = e.target.result;
+        console.log(e);
+        uploadImage(file.name, contents);
+    };
+
+    reader.readAsBinaryString(file);
+});
+
+function authenticate(){
+    s3 = new AWS.S3({
+        accessKeyId: accessKey,
+        secretAccessKey: secretKey
+    });
+}
+
+function clear_list(){
+    // Get the <ul> element with id="myList"
+    var list = document.getElementById("items");
+
+    // As long as <ul> has a child node, remove it
+    while (list.hasChildNodes()) {   
+        list.removeChild(list.firstChild);
+    }    
+}
+
+function load_album(){
+    clear_list();
+
     var albums = config.albums;
     var album_list = albums[current_album];
 
@@ -88,7 +135,6 @@ function load_album(event){
     var caption = null;
     var delete_btn = null;
 
-    console.log(config);
     for (var i = 0; i < album_list.length; i++)
     {
         photo = album_list[i];
@@ -122,6 +168,11 @@ function load_album(event){
 };
 
 function delete_photo(event){
+    if (s3 == null){
+        console.error("Not authenticated!");
+        return;
+    }
+
     var album = event.path[0].attributes["album"].value; 
     var file = event.path[0].attributes["file"].value; 
 
@@ -138,24 +189,52 @@ function delete_photo(event){
         }        
     }
 
-    album_list.splice(delete_index, delete_index+1)
+    album_list.splice(delete_index, 1)
     config.albums[album] = album_list;
     putConfig();
+    load_album();
+
+    var params = {
+        Bucket: "qfoster",
+        Key: album + "/" + file
+    };
+
+    // console.log(params);
+    s3.deleteObject(params, function(err, data){
+        console.log(err);
+        console.log(data);
+    }); 
 };
 
 function putConfig()
-{
-    var s3 = new AWS.S3({
-        accessKeyId: accessKey,
-        secretAccessKey: secretKey
-    });
-    
+{   
     var params = {
         Body: JSON.stringify(config),
         Bucket: "qfoster",
         Key: "config.json",
         ACL: "public-read"
     };
+
+    s3.putObject(params, function(err, data){
+        console.log(err);
+        console.log(data);
+    });
+}
+
+function uploadImage(file, contents){
+    var photo = {};
+    photo["file"] = file;
+    photo["caption"] = "default - caption";
+    config.albums[current_album].push(photo);
+    putConfig();
+
+    var params = {
+        Body: contents,
+        Bucket: "qfoster",
+        Key: current_album + "/" + file,
+        ACL: "public-read",
+        ContentType: 'image/jpeg'
+    }
 
     s3.putObject(params, function(err, data){
         console.log(err);
