@@ -2,12 +2,15 @@
 
 var config = null;
 var current_album = null;
+var secretKey = null;
+var accessKey = null;
 
 window.addEventListener("load", function(){
     $.getJSON("https://s3.amazonaws.com/qfoster/config.json", function(data){
         // useful global variable
         config = data;
 
+        // load album buttons
         var parent = document.getElementById("album-btns");
         var btn = null;        
         var albums = data.albums;
@@ -26,11 +29,28 @@ window.addEventListener("load", function(){
     });
 });
 
+// TODO: pick up here!
+document.getElementById("auth-file").addEventListener("change", function(e){
+    var file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        console.log(e);
+      var contents = e.target.result;
+      // Display file content
+      console.log(contents);
+    };
+    reader.readAsText(file);
+});
+
 document.getElementById("new-album-btn").addEventListener("click", function(){
 
 });
 
 document.getElementById("save-btn").addEventListener("click", function(){
+    var endpoint = "https://s3.amazonaws.com/qfoster/config.json";
     var ul = document.getElementById("items");
     var lis = ul.getElementsByTagName("li");
     var li = null;
@@ -44,6 +64,13 @@ document.getElementById("save-btn").addEventListener("click", function(){
     }
 
     config.albums[current_album] = photos;
+    $.ajax(endpoint, {
+        method: "PUT",
+        contentType: "application/json",
+        data: config
+    }).done(function(data){
+        console.log(data);
+    });
 });
 
 function load_album(album){
