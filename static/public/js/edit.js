@@ -10,6 +10,7 @@ window.addEventListener("load", function(){
     $.getJSON("https://s3.amazonaws.com/qfoster/config.json", function(data){
         // useful global variable
         config = data;
+        console.log(config);
 
         // load album buttons
         var parent = document.getElementById("album-btns");
@@ -22,7 +23,8 @@ window.addEventListener("load", function(){
             parent.appendChild(btn);
 
             btn.addEventListener("click", function(event){
-                current_album = event.path[0].attributes["album"].value;    
+                current_album = event.path[0].attributes["album"].value; 
+                console.log(current_album);   
                 load_album();
             })
         }
@@ -50,7 +52,7 @@ document.getElementById("auth-file").addEventListener("change", function(event){
 });
 
 document.getElementById("new-album-btn").addEventListener("click", function(){
-
+    console.log();
 });
 
 document.getElementById("save-btn").addEventListener("click", function(){
@@ -134,6 +136,8 @@ function load_album(){
     var li = null;
     var img = null;
     var caption = null;
+    var caption_text = null;
+    var caption_btn = null;
     var delete_btn = null;
 
     for (var i = 0; i < album_list.length; i++)
@@ -145,13 +149,28 @@ function load_album(){
 
         li = document.createElement("li");
         img = document.createElement("img");
-        caption = document.createElement("p");
+        caption = document.createElement("div");
+        caption_text = document.createElement("input");
+        caption_btn = document.createElement("button");
         delete_btn = document.createElement("button");
 
         li.setAttribute("file", file_name);
         li.setAttribute("caption", caption_txt);
         img.src = src;
-        caption.textContent = caption_txt;
+
+        caption_text.type = "text";
+        caption_text.value = caption_txt;
+        caption_text.id = file_name;
+        caption_btn.type = "button";
+        caption_btn.value = "Set";
+        caption_btn.setAttribute("file", file_name);
+        caption_btn.addEventListener("click", function(event){
+            SaveCaption(event);
+        });
+
+        caption.appendChild(caption_text);
+        caption.appendChild(caption_btn);
+
         delete_btn.value = "Delete";
         delete_btn.setAttribute("file", file_name);
         delete_btn.setAttribute("album", current_album);
@@ -165,7 +184,38 @@ function load_album(){
         ul.appendChild(li);
     }
 
-    Sortable.create(ul);
+    var options = {
+        onMove: tmp
+    };
+    Sortable.create(ul, options);
+};
+
+function SaveCaption(){
+    if (s3 == null){
+        console.error("Not authenticated!");
+        return;
+    }
+
+    var file_name = event.path[0].attributes["file"].value; 
+    var text_value = document.getElementById(file_name).value;
+    console.log(text_value);
+
+    var albums = config.albums;
+    var album_list = albums[current_album];
+    var delete_index = null;
+
+    for (var i = 0; i < album_list.length; i++)
+    {
+        if (album_list[i]["file"] == file_name)
+        {
+            album_list[i]["caption"] = text_value;
+            break;
+        }        
+    }
+
+    config.albums[current_album] = album_list;
+    putConfig();
+    console.log(config);
 };
 
 function delete_photo(event){
@@ -241,4 +291,11 @@ function uploadImage(file, contents){
         console.log(err);
         console.log(data);
     });
-}
+};
+
+
+
+function tmp(event, ui){
+    console.log(event);
+    console.log(ui);
+};
