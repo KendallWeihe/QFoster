@@ -1,4 +1,8 @@
 
+
+
+
+
 document.getElementById("sports").addEventListener("click", function() {
   $('.main-slide').slick('removeSlide', null, null, true);
   $('.main-slide').slick("unslick");
