@@ -3,49 +3,43 @@
 var config = null;
 var currentAlbum = null;
 var endpoint = "https://s3.amazonaws.com/qfoster";
-var s3 = new AWS.S3();
 
 window.addEventListener("load", function(){
-    // TODO: GetConfig() callback
     GetConfig(function(data){
-        console.log(data);
+        // useful global variable
+        config = data;
+
+        // load album buttons
+        var nav = document.getElementById("nav");
+        var a = null;        
+        var albums = data.albums;
+        for (var album in albums)
+        {
+            a = document.createElement("a");
+            a.href = "#";
+            a.setAttribute("album", album);
+            a.innerText = album;
+            nav.appendChild(a);
+
+            a.addEventListener("click", function(event)
+            {
+                currentAlbum = event.path[0].attributes["album"].value;    
+                load_album();
+            });
+
+            if (album == "reflections"){
+                currentAlbum = "reflections";
+                load_album();
+            }
+        }
     });
-
-    // $.getJSON("https://s3.amazonaws.com/qfoster/config.json", function(data){
-    //     // useful global variable
-    //     config = data;
-
-    //     // load album buttons
-    //     var nav = document.getElementById("nav");
-    //     var a = null;        
-    //     var albums = data.albums;
-    //     for (var album in albums)
-    //     {
-    //         a = document.createElement("a");
-    //         a.href = "#";
-    //         a.setAttribute("album", album);
-    //         a.innerText = album;
-    //         nav.appendChild(a);
-
-    //         a.addEventListener("click", function(event)
-    //         {
-    //             currentAlbum = event.path[0].attributes["album"].value;    
-    //             load_album();
-    //         });
-    //     }
-    // });
 });
 
 function GetConfig(callback){
-    var params = {
-        Bucket: "qfoster",
-        Key: "config.json"
-    };
-
-    s3.getObject(params, function(err, data)
-    {
-        console.log(data);
-        callback(data);
+    var configEndpoint = "https://s3.amazonaws.com/qfoster/config.json";
+    $.getJSON(configEndpoint, function(results){
+        console.log(results);
+        callback(results);
     });
 };
 
@@ -76,20 +70,41 @@ function load_album(){
         img = document.createElement("img");
         caption = document.createElement("p");
 
+        slideItem.id = "slideItem";
         slideItem.setAttribute("file", fileName);
         slideItem.setAttribute("caption", captionTxt);
         img.src = src;
+        img.id = "slideItem";
         caption.textContent = captionTxt;
 
         slideItem.appendChild(img);
         slideItem.appendChild(caption);
         slide.appendChild(slideItem);
     }
-    $('#main').slick('slick');    
+
+    $('#main').slick({
+        centerMode: true,
+        centerPadding: '0',
+        slidesToShow: 1,
+        infinite: true,
+        accessibility: true,
+        // arrows: false,
+        swipeToSlide: true,
+        cssEase: 'linear',
+        fade: true,
+        mobileFirst: true,
+        touchThreshold: 15,
+
+        dots: false,
+        prevArrow: false,
+        nextArrow: false        
+    });
 };
 
 function clear_list(){
-    $('#main').slick('unslick');
+    if ($('#main').children().length > 0){
+        $('#main').slick('unslick');
+    }
     var list = document.getElementById("main");
 
     while (list.hasChildNodes()) {   
