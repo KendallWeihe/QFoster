@@ -20,6 +20,7 @@ window.addEventListener("load", function(){
         {
             btn = document.createElement("button");
             btn.setAttribute("album", album);
+            btn.innerText = album;
             parent.appendChild(btn);
 
             btn.addEventListener("click", function(event){
@@ -162,7 +163,7 @@ function load_album(){
         caption_text.value = caption_txt;
         caption_text.id = file_name;
         caption_btn.type = "button";
-        caption_btn.value = "Set";
+        caption_btn.innerText = "Save caption";
         caption_btn.setAttribute("file", file_name);
         caption_btn.addEventListener("click", function(event){
             SaveCaption(event);
@@ -171,7 +172,7 @@ function load_album(){
         caption.appendChild(caption_text);
         caption.appendChild(caption_btn);
 
-        delete_btn.value = "Delete";
+        delete_btn.innerText = "Delete photo";
         delete_btn.setAttribute("file", file_name);
         delete_btn.setAttribute("album", current_album);
         delete_btn.addEventListener("click", function(event){
