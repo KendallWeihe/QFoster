@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>    
+  
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+
+  </head>
+  <body>
+
+    <div id="dpi" style="height: 1in; width: 1in; left: 100%; position: fixed; top: 100%;"></div>
+
+    <div class="container">
+      
+
+<div class="nav">
+    <div class="reflections-link"><a href="#" id="reflections">reflections</a></div>
+    <div class="sports-link"><a href="#" id="sports">sports</a></div>
+    <div class="logo-link"><img class="logo-img" src="/public/img/QF.png" style="object-fit: contain; height: 100%; width: 100%"></div>
+    <div class="portfolio-link"><a href="#" id="portraits">portraits</a></div>
+    <div class="italy-link"><a href="#" id="italy">italy</a></div>
+  </div>
+  
+  <div class="main">
+
+      <div class="main-slide" id="sports">
+        <!-- TODO: upon clicking a different nav link, update this divs id tag -->
+      </div>
+    
+    </div>
+    
+
+</div>
+
+    <div class="copyright">All images copyright protected by Quinn Foster &amp; UK Athletics</div>
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.js"></script>
+    <script type="text/javascript" src="/public/js/main.js"></script>
+    <script type="text/javascript">
+      console.log("loading main images...");
+      // load_thumbnails();
+      stylize();
+    </script>
+  </body>
+</html>
