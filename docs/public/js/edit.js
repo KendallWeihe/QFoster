@@ -5,12 +5,12 @@ var currentAlbum = null;
 var secretKey = null;
 var accessKey = null;
 var s3 = null;
+let authenticated = null;
 
 window.addEventListener("load", function(){
     $.getJSON("https://s3.amazonaws.com/qfoster/config.json", function(data){
         // useful global variable
         config = data;
-        console.log(config);
 
         // load album buttons
         var parent = document.getElementById("album-btns");
@@ -24,6 +24,7 @@ window.addEventListener("load", function(){
             parent.appendChild(btn);
 
             btn.addEventListener("click", function(event){
+                document.getElementById("album-hidden").style.visibility = "visible";
                 currentAlbum = event.path[0].attributes["album"].value; 
                 console.log(currentAlbum);   
                 load_album();
@@ -46,8 +47,23 @@ document.getElementById("auth-file").addEventListener("change", function(event){
         lines = contents.split("\n");
         accessKey = lines[1].split(" ")[2];
         secretKey = lines[2].split(" ")[2];
-        authenticate();
-        document.getElementById("hidden").style.visibility = "visible";        
+        authenticate(function(data){
+            authenticated = data;
+            if (authenticated){
+                if (document.getElementById("error-msg")){
+                    let error = document.getElementById("error-msg");
+                    error.outerHTML = "";
+                    delete error;
+                }
+                document.getElementById("auth-hidden").style.visibility = "visible";        
+            }
+            else {
+                let error = document.createElement("p");
+                error.id = "error-msg";
+                error.innerText = "There was an issue authenticating"
+                document.getElementById("main").appendChild(error);
+            }
+        });
     };
 
     reader.readAsText(file);
@@ -128,11 +144,21 @@ document.getElementById("delete-album").addEventListener("click", function(){
     putConfig();
 });
 
-function authenticate(){
+function authenticate(callback){
     s3 = new AWS.S3({
         accessKeyId: accessKey,
         secretAccessKey: secretKey
     });
+
+    let params = {
+        Bucket: "qfoster", 
+        MaxKeys: 1
+    };
+    s3.listObjects(params, function(err, data) {
+        if (err) callback(false); // an error occurred
+        else     callback(true);           // successful response
+    });
+
 }
 
 function clear_list(){
@@ -209,7 +235,7 @@ function load_album(){
     }
 
     var options = {
-        onMove: tmp
+        // onMove: tmp
     };
     Sortable.create(ul, options);
 };
@@ -319,7 +345,7 @@ function uploadImage(file, contents){
 
 
 
-function tmp(event, ui){
-    console.log(event);
-    console.log(ui);
-};
+// function tmp(event, ui){
+//     console.log(event);
+//     console.log(ui);
+// };
