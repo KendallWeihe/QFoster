@@ -12,9 +12,13 @@ window.addEventListener("load", function(){
         // load album buttons
         var nav = document.getElementById("nav");
         var a = null;        
-        var albums = data.albums;
-        for (var album in albums)
+        var albums = config.albums;
+        var album = null;
+        // for (var album in albums)
+        for (var i = 0; i < Object.keys(config.albums).length; i++)
         {
+            console.log(i);
+            album = Object.keys(config.albums)[i];
             a = document.createElement("a");
             a.href = "#";
             a.setAttribute("album", album);
@@ -30,6 +34,15 @@ window.addEventListener("load", function(){
             if (album == "reflections"){
                 currentAlbum = "reflections";
                 load_album();
+            }
+
+            if (i == (Object.keys(config.albums).length / 2 - 1)){
+                console.log(i);
+                a = document.createElement("a");
+                a.href = "#";
+                a.innerText = "QF";
+                a.style.fontStyle = "";
+                nav.appendChild(a);
             }
         }
     });
