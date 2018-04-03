@@ -132,6 +132,9 @@ function load_main_img(currentAlbum) {
   var main_slide = document.getElementsByClassName("main-slide")[0];
   var albums = config.albums;
   var albumList = albums[currentAlbum];
+  var div = null;
+  var img = null;
+  var caption = null;
 
   for (var i = 0; i < albumList.length; i++)
   {
@@ -140,13 +143,23 @@ function load_main_img(currentAlbum) {
       captionTxt = obj["caption"];
       src = endpoint + "/" + currentAlbum + "/" + fileName;
 
-      var div = document.createElement("div");
-      var img = document.createElement("img");
+      div = document.createElement("div");
+      img = document.createElement("img");
+      caption = document.createElement("div");
+
       img.src = src;
       img.style.height = "100%";
       img.style.objectFit = "contain";
       img.className = "main-slide-img"
+
+      caption.innerText = captionTxt;
+      caption.style.position = "relative";
+      caption.style.bottom = "20px";
+      caption.style.left = "70%";
+      caption.style.color = "white";
+
       div.appendChild(img);
+      div.appendChild(caption);
       div.style.height = "100%";
       main_slide.appendChild(div);
   }

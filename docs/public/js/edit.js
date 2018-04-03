@@ -1,7 +1,7 @@
 
 var endpoint = "https://s3.amazonaws.com/qfoster";
 var config = null;
-var current_album = null;
+var currentAlbum = null;
 var secretKey = null;
 var accessKey = null;
 var s3 = null;
@@ -24,8 +24,8 @@ window.addEventListener("load", function(){
             parent.appendChild(btn);
 
             btn.addEventListener("click", function(event){
-                current_album = event.path[0].attributes["album"].value; 
-                console.log(current_album);   
+                currentAlbum = event.path[0].attributes["album"].value; 
+                console.log(currentAlbum);   
                 load_album();
             })
         }
@@ -47,13 +47,17 @@ document.getElementById("auth-file").addEventListener("change", function(event){
         accessKey = lines[1].split(" ")[2];
         secretKey = lines[2].split(" ")[2];
         authenticate();
+        document.getElementById("hidden").style.visibility = "visible";        
     };
 
     reader.readAsText(file);
 });
 
 document.getElementById("new-album-btn").addEventListener("click", function(){
-    console.log();
+    let albumName = document.getElementById("album-name").value;
+    config.albums[albumName] = []
+    putConfig();
+    document.getElementById("album-name").value = "";
 });
 
 document.getElementById("save-btn").addEventListener("click", function(){
@@ -77,7 +81,7 @@ document.getElementById("save-btn").addEventListener("click", function(){
         photos.push(photo);
     }
 
-    config.albums[current_album] = photos;
+    config.albums[currentAlbum] = photos;
     putConfig();
 });
 
@@ -105,6 +109,25 @@ document.getElementById("new-photo-btn").addEventListener("change", function(eve
     reader.readAsArrayBuffer(file);
 });
 
+document.getElementById("delete-album").addEventListener("click", function(){
+    let params = null;
+    for (let photo in config.albums[currentAlbum]){
+        params = {
+            Key: currentAlbum + "/" + photo.file,
+            Bucket: "qfoster"
+        };
+        console.log(params);
+
+        s3.deleteObject(params, function(err, data){
+            console.log(err);
+            console.log(data);
+        });
+    }
+    
+    delete config.albums[currentAlbum];
+    putConfig();
+});
+
 function authenticate(){
     s3 = new AWS.S3({
         accessKeyId: accessKey,
@@ -126,7 +149,7 @@ function load_album(){
     clear_list();
 
     var albums = config.albums;
-    var album_list = albums[current_album];
+    var album_list = albums[currentAlbum];
 
     var photo = null;
     var file_name = null;
@@ -146,7 +169,7 @@ function load_album(){
         photo = album_list[i];
         file_name = photo["file"];
         caption_txt = photo["caption"];
-        src = endpoint + "/" + current_album + "/" + file_name;
+        src = endpoint + "/" + currentAlbum + "/" + file_name;
 
         li = document.createElement("li");
         img = document.createElement("img");
@@ -174,7 +197,7 @@ function load_album(){
 
         delete_btn.innerText = "Delete photo";
         delete_btn.setAttribute("file", file_name);
-        delete_btn.setAttribute("album", current_album);
+        delete_btn.setAttribute("album", currentAlbum);
         delete_btn.addEventListener("click", function(event){
             delete_photo(event);
         });
@@ -202,7 +225,7 @@ function SaveCaption(){
     console.log(text_value);
 
     var albums = config.albums;
-    var album_list = albums[current_album];
+    var album_list = albums[currentAlbum];
     var delete_index = null;
 
     for (var i = 0; i < album_list.length; i++)
@@ -214,7 +237,7 @@ function SaveCaption(){
         }        
     }
 
-    config.albums[current_album] = album_list;
+    config.albums[currentAlbum] = album_list;
     putConfig();
     console.log(config);
 };
@@ -277,13 +300,13 @@ function uploadImage(file, contents){
     var photo = {};
     photo["file"] = file;
     photo["caption"] = "default - caption";
-    config.albums[current_album].push(photo);
+    config.albums[currentAlbum].push(photo);
     putConfig();
 
     var params = {
         Body: contents,
         Bucket: "qfoster",
-        Key: current_album + "/" + file,
+        Key: currentAlbum + "/" + file,
         ACL: "public-read",
         ContentType: 'image/jpeg'
     }
