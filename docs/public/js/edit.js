@@ -48,6 +48,57 @@ document.getElementById("auth-file").addEventListener("change", function(event){
     reader.readAsText(file);
 });
 
+document.getElementById("new-album-btn").addEventListener("click", function(){
+    let albumName = document.getElementById("album-name").value;
+    config.albums[albumName] = [];
+    config.albumOrder.push(albumName);
+    PutConfig();
+    RenderAlbumItems();
+    document.getElementById("album-name").value = "";
+});
+
+document.getElementById("save-btn").addEventListener("click", function(){
+    SaveAll();
+    PutConfig();
+});
+
+document.getElementById("new-photo-btn").addEventListener("change", function(event){
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    let contents = null;
+    let lines = null;
+    reader.onload = function(e) {
+        contents = e.target.result;
+        console.log(e);
+        UploadImage(file.name, contents);
+    };
+
+    reader.readAsArrayBuffer(file);
+});
+
+document.getElementById("delete-album").addEventListener("click", function(){
+    let params = null;
+    for (let photo in config.albums[currentAlbum]){
+        params = {
+            Key: currentAlbum + "/" + photo.file,
+            Bucket: "qfoster"
+        };
+        console.log(params);
+
+        s3.deleteObject(params, function(err, data){
+            console.log(err);
+            console.log(data);
+        });
+    }
+
+    delete config.albums[currentAlbum];
+    
+    let index = config.albumOrder.indexOf(currentAlbum);
+    config.albumOrder.splice(index, 1);
+
+    PutConfig();
+});
+
 function Authenticate(callback){
     s3 = new AWS.S3({
         accessKeyId: accessKey,
@@ -190,55 +241,38 @@ function ClearAlbumItems(){
     }    
 }
 
-function SaveAlbumOrder(event){
-    console.log(event);
-    // if (timeout) clearTimeout(timeout);
-
-    // timeout = setTimeout(function () {
-    //     let albums = document.getElementById("album-sort").childNodes;
-    //     let node = null;
-    //     config.albumOrder = []
-    //     for (let i = 0; i < albums.length; i++){
-    //         node = albums[i];
-    //         config.albumOrder.push(node.getAttribute("album"));
-    //         console.log(node.getAttribute("album"));
-    //         console.log(config);
-    //     }
-    //     console.log(config.albumOrder);
-    //     PutConfig();
-    // }, 3000);
-};
-
-function SaveAlbumItemsOrder(){
-    if (timeout) clearTimeout(timeout);
-
-    timeout = setTimeout(function () {
-        let albumItems = document.getElementById("items").childNodes;
-        let node = null;
-        let fileName = null;
-        let caption = null;
-        let obj = null;
-        config.albums[currentAlbum] = []
-        for (let i = 0; i < albumItems.length; i++){
-            node = albumItems[i];
-            fileName = node.getAttribute("file");
-            caption = node.getAttribute("caption");
-            obj = {
-                file: fileName,
-                caption: caption
-            };
-        }
-        console.log(config);
-        PutConfig();
-    }, 3000);
-};
-
-function SaveCaptions(){
-
-};
-
 function DeletePhoto(event){
+    let album = event.path[0].attributes["album"].value; 
+    let file = event.path[0].attributes["file"].value; 
 
+    let albums = config.albums;
+    let album_list = albums[album];
+    let delete_index = null;
+
+    for (let i = 0; i < album_list.length; i++)
+    {
+        if (album_list[i]["file"] == file)
+        {
+            delete_index = i;
+            break;
+        }        
+    }
+
+    album_list.splice(delete_index, 1)
+    config.albums[album] = album_list;
+    PutConfig();
+    RenderAlbumItems();
+
+    let params = {
+        Bucket: "qfoster",
+        Key: album + "/" + file
+    };
+
+    // console.log(params);
+    s3.deleteObject(params, function(err, data){
+        console.log(err);
+        console.log(data);
+    }); 
 };
 
 function SaveAll(){
@@ -335,7 +369,27 @@ function FindParentPath(child, parent, callback){
     callback(current);
 };
 
+function UploadImage(file, contents){
+    let photo = {};
+    photo["file"] = file;
+    photo["caption"] = "default - caption";
+    config.albums[currentAlbum].push(photo);
+    PutConfig();
 
+    var params = {
+        Body: contents,
+        Bucket: "qfoster",
+        Key: currentAlbum + "/" + file,
+        ACL: "public-read",
+        ContentType: 'image/jpeg'
+    }
+
+    s3.putObject(params, function(err, data){
+        console.log(err);
+        console.log(data);
+        RenderAlbumItems();
+    });
+};
 
 
 
