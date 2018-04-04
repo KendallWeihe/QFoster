@@ -300,7 +300,13 @@
                 "caption": "default - caption"
             }
         ]
-    }
+    },
+    "albumOrder": [
+        "reflections",
+        "sports",
+        "portfolio",
+        "italy"
+    ]
 }
 
 
