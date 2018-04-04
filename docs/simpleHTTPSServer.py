@@ -2,5 +2,5 @@ import BaseHTTPServer, SimpleHTTPServer
 import ssl
 
 httpd = BaseHTTPServer.HTTPServer(('localhost', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)
-httpd.socket = ssl.wrap_socket (httpd.socket, certfile='./security/server.pem', server_side=True)
+httpd.socket = ssl.wrap_socket (httpd.socket, certfile='./simpleCert.pem', server_side=True)
 httpd.serve_forever()

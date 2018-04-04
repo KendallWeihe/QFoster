@@ -17,16 +17,18 @@ a:active {
 }
 
 .container {
-  width: 90%;
-  height: 90%;
+  height: calc(90%);
+  width: calc(90%);
+  top: calc(5%);
+  left: calc(5%);
   background: black;
   margin: auto;
   position: absolute;
 }
 
 .nav {
-  width: 80%;
-  height: 7%;
+  height: calc(7%);
+  top: calc(5%);
   margin: auto;
   position: absolute;
 
@@ -50,8 +52,10 @@ a:active {
 }
 
 .main {
-  width: 80%;
-  height: 82.5%;
+  height: calc(80%);
+  width: calc(80%);
+  top: calc(15%);
+  left: calc(10%);
   margin: auto;
   position: absolute;
 }
