@@ -12,4 +12,16 @@
 
 
 
+# DRAGGABLE LOGIC:
+
+- if drag started:
+    - store in global variable
+- if dragover;
+    - preventDefault()
+- if drop:
+    - check dropzone 
+    - dragged remove node 
+    - event.target.appendChild( dragged );
+
+TODO: insert before or after
 

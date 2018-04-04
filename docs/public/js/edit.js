@@ -7,6 +7,7 @@ let accessKey = null;
 let s3 = null;
 let authenticated = null;
 let timeout = null;
+let draggable = null;
 
 window.addEventListener("load", function(){
     $.getJSON("https://s3.amazonaws.com/qfoster/config.json", function(data){
@@ -82,16 +83,24 @@ function RenderAlbums(){
         btn.draggable = "true";
 
         btn.addEventListener("click", function(event){
-            console.log("click");
-            console.log(event);
             document.getElementById("album-hidden").style.visibility = "visible";
             currentAlbum = event.path[0].attributes["album"].value; 
             RenderAlbumItems();
         })
 
+        btn.addEventListener("dragstart", function(event){
+            console.log("started");
+            HandleDragStarted(event);
+        });
+
+        btn.addEventListener("dragover", function(event){
+            console.log("over");
+            HandleDragOver(event);
+        });
+
         btn.addEventListener("drop", function(event){
             console.log("drop");
-            console.log(event);
+            HandleDrop(event, albumBtns.id);
         });
 
         albumBtns.appendChild(btn);
@@ -129,6 +138,7 @@ function RenderAlbumItems(){
 
         li.setAttribute("file", fileName);
         li.setAttribute("caption", caption);
+        li.draggable = true;
 
         img.src = src;
 
@@ -150,16 +160,26 @@ function RenderAlbumItems(){
             DeletePhoto(event);
         });
 
+        li.addEventListener("dragstart", function(event){
+            console.log("started");
+            HandleDragStarted(event);
+        });
+
+        li.addEventListener("dragover", function(event){
+            console.log("over");
+            HandleDragOver(event);
+        });
+
+        li.addEventListener("drop", function(event){
+            console.log("drop");
+            HandleDrop(event, albumBtns.id);
+        });        
+
         li.appendChild(img);
         li.appendChild(captionInput);
         li.appendChild(deleteBtn);
         ul.appendChild(li);
     }
-
-    var options = {
-        onEnd: SaveAlbumItemsOrder()
-    };
-    Sortable.create(ul, options);
 };
 
 function ClearAlbumItems(){
@@ -236,10 +256,26 @@ function PutConfig(){
 
 // ----- DRAGGABLE CODE -----------------
 
+function HandleDragStarted(event){
+    draggable = event.target;
+};
+
+function HandleDragOver(event){
+    event.preventDefault();
+};
+
 function HandleDrop(event, dropzone){
-    // TODO:
-    //     - if event.dropzone == dropzone 
-    //         - drop and reorder html
+    console.log(event);
+    event.preventDefault();
+    if ( event.target.parentNode.id == dropzone ) {
+        event.target.style.background = "";
+        draggable.parentNode.removeChild( draggable );
+        event.target.parentNode.insertBefore(draggable, event.target);
+    }
+    else {
+        console.log(event);
+        console.log(dropzone);
+    }
 };
 
 
