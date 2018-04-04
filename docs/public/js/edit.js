@@ -100,7 +100,7 @@ function RenderAlbums(){
 
         btn.addEventListener("drop", function(event){
             console.log("drop");
-            HandleDrop(event, albumBtns.id);
+            HandleDrop(event, albumBtns);
         });
 
         albumBtns.appendChild(btn);
@@ -149,7 +149,8 @@ function RenderAlbumItems(){
             if (timeout) clearTimeout(timeout);
 
             timeout = setTimeout(function () {
-                SaveCaptions();
+                // SaveCaptions();
+                SaveAll();
             }, 1000);
         });
 
@@ -172,7 +173,7 @@ function RenderAlbumItems(){
 
         li.addEventListener("drop", function(event){
             console.log("drop");
-            HandleDrop(event, albumBtns.id);
+            HandleDrop(event, ul);
         });        
 
         li.appendChild(img);
@@ -240,6 +241,43 @@ function DeletePhoto(event){
 
 };
 
+function SaveAll(){
+    let hAlbumOrder = document.getElementById("album-btns").childNodes;
+    let hAlbumItems = document.getElementById("items").childNodes;
+
+    let albumOrder = [];
+    let album = null;
+    for (let i = 0; i < hAlbumOrder.length; i++){
+        album = hAlbumOrder[i].getAttribute("album");
+        albumOrder.push(album);
+    }
+
+    let albumItems = []
+    let albumItem = null;
+    let fileName = null;
+    let caption = null;
+    for (let i = 0; i < hAlbumItems.length; i++){
+        console.log(hAlbumItems[i]);
+        fileName = hAlbumItems[i].getAttribute("file");
+        console.log(fileName);
+        caption = hAlbumItems[i].childNodes[1].value;
+        draggable = hAlbumItems;
+        console.log(caption);
+        albumItem = {
+            file: fileName,
+            caption: caption
+        };
+        albumItems.push(albumItem);
+    }
+
+    config.albumOrder = albumOrder;
+    config.albums[currentAlbum] = albumItems;
+
+    console.log(config);
+
+    PutConfig();
+};
+
 function PutConfig(){
     let params = {
         Body: JSON.stringify(config),
@@ -257,7 +295,12 @@ function PutConfig(){
 // ----- DRAGGABLE CODE -----------------
 
 function HandleDragStarted(event){
-    draggable = event.target;
+    let current = event.target;
+    while (current.getAttribute("draggable") == null){
+        current = current.parentNode;
+    }
+    draggable = current;
+    console.log(draggable);
 };
 
 function HandleDragOver(event){
@@ -267,17 +310,30 @@ function HandleDragOver(event){
 function HandleDrop(event, dropzone){
     console.log(event);
     event.preventDefault();
-    if ( event.target.parentNode.id == dropzone ) {
+    if (dropzone.contains(event.target)) {
         event.target.style.background = "";
         draggable.parentNode.removeChild( draggable );
-        event.target.parentNode.insertBefore(draggable, event.target);
+        FindParentPath(event.target, dropzone, function(target){
+            dropzone.insertBefore(draggable, target);
+            SaveAll();
+        });
     }
     else {
         console.log(event);
         console.log(dropzone);
+        console.log(event.target.parentNode.id);
     }
 };
 
+// ---- HELPERS ----------------------
+
+function FindParentPath(child, parent, callback){
+    let current = child;
+    while (current.parentNode != parent){
+        current = current.parentNode;
+    }
+    callback(current);
+};
 
 
 
