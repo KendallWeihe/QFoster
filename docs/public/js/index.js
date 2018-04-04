@@ -7,11 +7,22 @@ window.addEventListener("load", function(){
         // useful global variable
         config = data;
 
+        let nav = document.getElementById("nav");
+        let columnCount = config.albumOrder.length + 1;
+        let gridCss = "display: grid; grid-template-columns: ";
+        let percentage = 100.0 / columnCount;
+
+        for (let i = 0; i < columnCount; i++){
+            gridCss += percentage.toString() + "% "
+        }
+
+        gridCss += "; grid-template-rows: 100%;"
+        nav.style = gridCss;
+
         // load album buttons
         var a = null;        
         var albums = config.albums;
         var album = null;
-        let nav = document.getElementById("nav");
         for (let album in albums)
         {
             a = document.createElement("a");
