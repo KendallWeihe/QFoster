@@ -38,3 +38,7 @@ body {
 .logo:hover {
     transform: scaleY(-1);
 }
+
+/* .logo {
+    animation: rotation 8s infinite linear;
+} */
