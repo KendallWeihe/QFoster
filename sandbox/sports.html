@@ -7,31 +7,6 @@
     crossorigin="anonymous"></script>    
     <link rel="stylesheet" type="text/css" href="public/css/layout.css">
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <script src="public/js/siema.min.js"></script>     
-    <script>
-        function LoadSiema(){
-            new Siema({
-                selector: ".slide",
-                perPage: 1
-            });
-
-            document.getElementsByClassName("container")[0].style.visibility = "visible";
-            document.getElementsByClassName("copyright")[0].style.visibility = "visible";
-            document.getElementsByClassName("landing")[0].style.visibility = "hidden";
-
-            let slideHeight = document.getElementsByClassName("slide")[0].clientHeight;
-            let slideWidth = document.getElementsByClassName("slide")[0].clientWidth;
-
-            let imgs = document.getElementsByClassName("slide-item");
-            let img = null;
-            let i = 0;
-            for (i = 0; i < imgs.length; i++){
-                img = imgs[i];
-                img.style.height = slideHeight + "px";
-                img.style.width = slideWidth + "px";
-            }
-        };
-    </script>
 </head>
 <body>   
     <div class="landing">
@@ -70,5 +45,7 @@
     <div class="copyright">
         All images copyright protected by Quinn Foster &amp; UK Athletics
     </div>
+    <script src="public/js/siema.min.js"></script>     
+    <script src="public/js/index.js"></script>
 </body>
 </html>

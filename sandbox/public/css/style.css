@@ -14,8 +14,14 @@ body {
 
 .nav-item {
     color: white;
+    text-decoration: none;
 
     font-size: 3vw;
     font-family: Didot, "Didot LT STD";
     font-style: italic;
+}
+
+.logo:hover {
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
 }
