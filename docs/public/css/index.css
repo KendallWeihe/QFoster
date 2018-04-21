@@ -32,9 +32,6 @@ a:active {
   margin: auto;
   position: absolute;
 
-  /* display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 100%; */
   text-align: center;
   font-size: 3vw;
   font-family: Didot, "Didot LT STD";

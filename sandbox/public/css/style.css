@@ -1,0 +1,12 @@
+body {
+    background-color: grey;
+}
+
+.container {
+    background-color: black;
+    background-clip: content-box;
+}
+
+.nav-item {
+    color: white;
+}
