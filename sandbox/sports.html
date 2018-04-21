@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>    
+    <link rel="stylesheet" type="text/css" href="public/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <script src="public/js/siema.min.js"></script>     
+    <script>
+        function LoadSiema(){
+            new Siema({
+                selector: ".slide",
+                perPage: 1
+            });
+
+            document.getElementsByClassName("container")[0].style.visibility = "visible";
+            document.getElementsByClassName("copyright")[0].style.visibility = "visible";
+            document.getElementsByClassName("landing")[0].style.visibility = "hidden";
+
+            let slideHeight = document.getElementsByClassName("slide")[0].clientHeight;
+            let slideWidth = document.getElementsByClassName("slide")[0].clientWidth;
+
+            let imgs = document.getElementsByClassName("slide-item");
+            let img = null;
+            let i = 0;
+            for (i = 0; i < imgs.length; i++){
+                img = imgs[i];
+                img.style.height = slideHeight + "px";
+                img.style.width = slideWidth + "px";
+            }
+        };
+    </script>
+</head>
+<body>   
+    <div class="landing">
+        <img class="piece" src="./public/img/piece.png">
+    </div>
+    <div class="container">
+        <div class="nav">
+            <a class="nav-item" href="reflections.html">Reflections</a>
+            <a class="nav-item" href="sports.html">Sports</a>
+            <a class="nav-item" href="about.html">
+                <img class="logo" src="public/img/QF.png" />                
+            </a>
+            <a class="nav-item" href="portraits.html">Portraits</a>
+            <a class="nav-item" href="italy.html">Italy</a>
+        </div>
+        <div class="slide">
+            <img onload="LoadSiema();" class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_01.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_02.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_03.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_04.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_05.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_06.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_07.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_08.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_09.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_10.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_11.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_12.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_13.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_14.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_15.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_16.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_17.JPG" />
+        </div>
+    </div>
+    <div class="copyright">
+        All images copyright protected by Quinn Foster &amp; UK Athletics
+    </div>
+</body>
+</html>

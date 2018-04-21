@@ -14,4 +14,8 @@ body {
 
 .nav-item {
     color: white;
+
+    font-size: 3vw;
+    font-family: Didot, "Didot LT STD";
+    font-style: italic;
 }
