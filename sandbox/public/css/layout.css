@@ -14,12 +14,29 @@ body {
 }
 
 .container {
+    position: absolute;
+    top: 0%;
+
     height: 90%;
     width: 90%;
     padding: 5% 5% 5% 5%;
 
     display: flex;
     flex-direction: column;
+
+    visibility: hidden;
+}
+
+.landing {
+    height: 100%;
+    width: 100%;
+}
+
+.piece {
+    height: 80%;
+    width: 80%;
+    padding: 10% 10% 10% 10%;
+    object-fit: contain;
 }
 
 .nav {
@@ -45,11 +62,11 @@ body {
     /* height: 90%;
     width: 90%;
     padding: 5% 5% 5% 5%; */
+    height: calc(100%);
+    width: calc(100%);
 }
 
 .slide-item {
-    height: 100%;
-    width: 100%;
     object-fit: contain;
 }
 
@@ -58,4 +75,6 @@ body {
     width: 100%;
     bottom: 0%;
     text-align: center;
+
+    visibility: hidden;
 }
