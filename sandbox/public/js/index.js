@@ -1,7 +1,9 @@
 
 
+let siema = null;
+
 function LoadSiema(){
-    new Siema({
+    siema = new Siema({
         selector: ".slide",
         perPage: 1
     });
@@ -22,3 +24,16 @@ function LoadSiema(){
         img.style.width = slideWidth + "px";
     }
 };
+
+document.addEventListener("keydown", function(event){
+    console.log(event);
+    console.log(event.char);
+    console.log(event.key);
+    let type = event.key;
+    if (type == "ArrowRight"){
+        siema.next();
+    }
+    else if (type == "ArrowLeft"){
+        siema.prev();
+    }
+});

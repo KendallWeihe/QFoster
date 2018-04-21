@@ -2,9 +2,23 @@ body {
     background-color: grey;
 }
 
-.container {
-    /* background-color: black;
-    background-clip: content-box; */
+.piece {
+    animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.landing-msg {
+    font-size: 3vw;
+    font-family: Didot, "Didot LT STD";
+    font-style: italic;
 }
 
 .nav {
@@ -22,6 +36,5 @@ body {
 }
 
 .logo:hover {
-    -webkit-transform: scaleY(-1);
     transform: scaleY(-1);
 }

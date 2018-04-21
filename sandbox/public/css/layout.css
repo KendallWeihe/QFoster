@@ -47,6 +47,13 @@ body {
     object-fit: contain;
 }
 
+.landing-msg {
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    text-align: center;
+}
+
 .nav {
     flex: 1;
 
@@ -69,6 +76,7 @@ body {
     flex: 5;
     height: calc(100%);
     width: calc(100%);
+    background-color: black;
 }
 
 .slide-item {
