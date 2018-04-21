@@ -3,6 +3,11 @@ body {
 }
 
 .container {
+    /* background-color: black;
+    background-clip: content-box; */
+}
+
+.nav {
     background-color: black;
     background-clip: content-box;
 }
