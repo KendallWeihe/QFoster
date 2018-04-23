@@ -11,6 +11,7 @@
 <body>   
     <div class="landing">
         <img class="piece" src="./public/img/piece.png">
+        <p class="landing-msg">Loading...</p>
     </div>
     <div class="container">
         <div class="nav">
@@ -18,13 +19,12 @@
             <a class="nav-item" href="sports.html">Sports</a>
             <a class="nav-item" href="about.html">
                 <img class="logo" src="public/img/QF.png" />   
-                <p class="landing-msg">Loading...</p>
             </a>
             <a class="nav-item" href="portraits.html">Portraits</a>
             <a class="nav-item" href="italy.html">Italy</a>
         </div>
         <div class="slide">
-            <img onload="LoadSiema();" class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_01.JPG" />
+            <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_01.JPG" />
             <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_02.JPG" />
             <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_03.JPG" />
             <img class="slide-item" src="https://s3.amazonaws.com/qfoster/sports/Sports_QF_04.JPG" />
@@ -46,6 +46,8 @@
     <div class="copyright">
         All images copyright protected by Quinn Foster &amp; UK Athletics
     </div>
+
+    <script src="public/js/imagesloaded.js"></script>
     <script src="public/js/siema.min.js"></script>     
     <script src="public/js/index.js"></script>
 </body>

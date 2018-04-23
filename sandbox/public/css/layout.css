@@ -2,7 +2,7 @@
 * { 
     -moz-box-sizing: border-box; 
     -webkit-box-sizing: border-box; 
-     box-sizing: border-box; 
+    box-sizing: border-box; 
 }
 
 html {
@@ -68,8 +68,8 @@ body {
 }
 
 .logo {
-    height: 60%;
-    width: 60%;
+    height: 50%;
+    width: 50%;
 }
 
 .slide {

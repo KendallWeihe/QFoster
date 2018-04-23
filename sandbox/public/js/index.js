@@ -37,3 +37,7 @@ document.addEventListener("keydown", function(event){
         siema.prev();
     }
 });
+
+imagesLoaded('.slide', function() {
+    LoadSiema();
+});
